@@ -1,4 +1,18 @@
+#panel{
+    -fx-background-color : #b7ffe4;
+}
+
 #btnMenu{
     -fx-background-color :  #4ab57f;
 }
 
+#btnMenu:hover {
+    -fx-effect: innershadow(gaussian, #ffffff, 8, 0.5, 0, 0);
+}
+#menuLateral{
+    -fx-background-color :  #008452;
+}
+
+#barraSuperior{
+    -fx-background-color :  #008452;
+}
