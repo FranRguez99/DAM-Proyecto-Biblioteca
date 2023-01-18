@@ -8,6 +8,4 @@ module safa.ad_biblioteca {
     exports safa.ad_biblioteca;
     exports safa.ad_biblioteca.model;
     opens safa.ad_biblioteca.model to javafx.fxml;
-    exports safa.ad_biblioteca.controller;
-    opens safa.ad_biblioteca.controller to javafx.fxml;
 }
