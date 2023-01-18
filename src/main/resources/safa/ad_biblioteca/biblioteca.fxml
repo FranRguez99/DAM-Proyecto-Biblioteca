@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.controller.ControladorPrincipal">
-   <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+   <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
       <ImageView fitHeight="274.0" fitWidth="310.0" layoutX="525.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
          <Image url="@img/background/pngwing.com.png" />
       </ImageView>
@@ -27,39 +27,39 @@
          </Label>
       </Pane>
       <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-      <Label layoutX="240.0" layoutY="96.0" prefHeight="16.0" prefWidth="100.0" text="aaaaaaaaaa">
+      <Label id="txtSeccion" layoutX="240.0" layoutY="96.0" prefHeight="27.0" prefWidth="148.0" stylesheets="@style.css" text="Bienvenido">
          <font>
-            <Font name="Corbel Bold" size="19.0" />
+            <Font name="Arial Black" size="18.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="279.0" text="• Préstamos">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="298.0" text="• Devoluciones ">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="317.0" text="• Registro de Usuarios y Libros Nuevos">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="336.0" text="• Edición de Usuarios y Libros existentes">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="355.0" text="• Eliminar todo tipo de Registros ">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Label layoutX="260.0" layoutY="374.0" text="• Gestión de retrasos">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
       <Pane id="menuLateral" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" stylesheets="@style.css">
@@ -131,12 +131,12 @@
       </Pane>
       <Text layoutX="240.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de gestión para biblioteca pública. Controle y administre de forma óptima y fácil el flujo de préstamos y devoluciones de libros." textAlignment="JUSTIFY" wrappingWidth="325.0">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </Text>
       <Text layoutX="240.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esta herramienta le permitirá llevar el control completo y detallado de su biblioteca, tendrá acceso a herramientas especiales para tareas específicas, como son:" textAlignment="JUSTIFY" wrappingWidth="325.0">
          <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </Text>
    </Pane>
@@ -152,9 +152,9 @@
             </children>
          </Pane>
          <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField layoutX="234.0" layoutY="153.0" prefHeight="25.0" prefWidth="411.0" promptText="Ingrese el ISBN del Libro a buscar" />
-         <TableView layoutX="233.0" layoutY="191.0" prefHeight="180.0" prefWidth="584.0" />
-         <Label layoutX="241.0" layoutY="100.0" text="Libros">
+         <TextField layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
+         <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+         <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
             <font>
                <Font name="Corbel Bold" size="19.0" />
             </font>
@@ -162,32 +162,32 @@
          <Pane id="menuLateral" layoutX="14.0" prefHeight="421.0" prefWidth="210.0" stylesheets="@style.css">
             <children>
                <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-               <Label id="iLib" layoutX="74.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+               <Label id="iLib" layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="21.0" />
                   </font>
                </Label>
-               <Button id="btnMenu" fx:id="btnLibrosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="150.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnLibrosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnLibrosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnLibrosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnLibrosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnLibrosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnLibrosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnLibrosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_home.png" />
                   </image>
@@ -195,7 +195,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_calendar.png" />
                   </image>
@@ -203,7 +203,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_calendarOK.png" />
                   </image>
@@ -211,7 +211,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_cuenta.png" />
                   </image>
@@ -221,7 +221,7 @@
                </ImageView>
             </children>
          </Pane>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="661.0" layoutY="152.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -229,7 +229,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="368.0" layoutY="384.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnLibrosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -237,7 +237,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="520.0" layoutY="384.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnLibrosModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -245,7 +245,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="674.0" layoutY="384.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnLibrosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -253,6 +253,11 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
+         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
+            <image>
+               <Image url="@img/background/bibliotecas1024x512.png" />
+            </image>
+         </ImageView>
       </children>
    </Pane>
    <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
@@ -267,9 +272,9 @@
             </children>
          </Pane>
          <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField layoutX="234.0" layoutY="153.0" prefHeight="25.0" prefWidth="411.0" promptText="Ingrese el DNI del usuario a buscar" />
-         <TableView layoutX="233.0" layoutY="191.0" prefHeight="180.0" prefWidth="584.0" />
-         <Label layoutX="240.0" layoutY="99.0" prefHeight="17.0" prefWidth="77.0" text="Usuarios">
+         <TextField editable="false" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el DNI del usuario a buscar" />
+         <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="111.0" stylesheets="@style.css" text="Usuarios">
             <font>
                <Font name="Corbel Bold" size="19.0" />
             </font>
@@ -282,27 +287,27 @@
                      <Font name="Myanmar Text Bold" size="21.0" />
                   </font>
                </Label>
-               <Button id="btnMenu" fx:id="btnUsuariosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="150.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnUsuariosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnUsuariosLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnUsuariosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnUsuariosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_home.png" />
                   </image>
@@ -310,7 +315,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_libro.png" />
                   </image>
@@ -318,7 +323,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_calendar.png" />
                   </image>
@@ -326,7 +331,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_calendarOK.png" />
                   </image>
@@ -336,7 +341,7 @@
                </ImageView>
             </children>
          </Pane>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="149.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnUsuariosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -344,7 +349,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="369.0" layoutY="386.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnUsuariosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -352,7 +357,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="521.0" layoutY="386.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnUsuariosModif" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -360,7 +365,7 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="675.0" layoutY="386.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnUsuariosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -368,6 +373,11 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
+         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
+            <image>
+               <Image url="@img/background/bibliotecas1024x512.png" />
+            </image>
+         </ImageView>
       </children>
    </Pane>
    <Pane id="principal" fx:id="panelRegistroUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
@@ -383,7 +393,7 @@
          </Pane>
          <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
          <Separator id="separator" blendMode="GREEN" layoutX="405.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
-         <Label layoutX="22.0" layoutY="95.0" prefHeight="25.0" prefWidth="200.0" text="Registrar nuevo usuario">
+         <Label id="txtSeccion" layoutX="22.0" layoutY="95.0" prefHeight="27.0" prefWidth="265.0" stylesheets="@style.css" text="Registrar nuevo usuario">
             <font>
                <Font name="Corbel Bold" size="18.0" />
             </font>
@@ -424,19 +434,19 @@
          <TextField layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
          <TextField layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
          <TextField layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnRegUsuarioVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
       </children>
    </Pane>
-   <Pane id="principal" fx:id="panelRegistroUsuarios1" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+   <Pane id="principal" fx:id="panelRegistroLibros" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
       <children>
          <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
             <children>
@@ -449,7 +459,7 @@
          </Pane>
          <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
          <Separator id="separator" blendMode="GREEN" layoutX="372.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
-         <Label layoutX="20.0" layoutY="95.0" prefHeight="25.0" prefWidth="200.0" text="Registrar nuevo libro">
+         <Label id="txtSeccion" layoutX="20.0" layoutY="95.0" prefHeight="27.0" prefWidth="247.0" stylesheets="@style.css" text="Registrar nuevo libro">
             <font>
                <Font name="Corbel Bold" size="18.0" />
             </font>
@@ -490,12 +500,12 @@
          <TextField layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el idioma del libro" />
          <TextField layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de páginas del libro" />
          <TextField layoutX="460.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de ejemplares del libro" />
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnRegLibREgistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnRegLibVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -508,7 +518,7 @@
          <ComboBox layoutX="51.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Seleccione una categoría" />
       </children>
    </Pane>
-   <Pane id="principal" fx:id="panelUsuarios1" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+   <Pane id="principal" fx:id="panelPrestamos" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
       <children>
          <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
             <children>
@@ -521,7 +531,7 @@
          </Pane>
          <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
          <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
-         <Label layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="158.0" text="Nuevo préstamo">
+         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="188.0" stylesheets="@style.css" text="Nuevo préstamo">
             <font>
                <Font name="Corbel Bold" size="19.0" />
             </font>
@@ -534,22 +544,22 @@
                      <Font name="Myanmar Text Bold" size="21.0" />
                   </font>
                </Label>
-               <Button id="btnMenu" fx:id="btnUsuariosPrincipal1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="151.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnUsuariosPrincipal1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosLibros1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="201.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosDevoluciones1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnPrestamosDevol" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_home.png" />
                   </image>
@@ -557,7 +567,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_libro.png" />
                   </image>
@@ -565,7 +575,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_calendarOK.png" />
                   </image>
@@ -575,7 +585,7 @@
                </ImageView>
             </children>
          </Pane>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnPrestamosPrestar" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -583,12 +593,12 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" fx:id="btnPrincipalUsuarios1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnPrestamosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@img/ico_cuenta.png" />
             </image>
@@ -612,9 +622,14 @@
                <Image url="@img/background/lib.png" />
             </image>
          </ImageView>
+         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
+            <image>
+               <Image url="@img/background/bibliotecas1024x512.png" />
+            </image>
+         </ImageView>
       </children>
    </Pane>
-   <Pane id="principal" fx:id="panelUsuarios11" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+   <Pane id="principal" fx:id="panelDevol" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css">
       <children>
          <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
             <children>
@@ -627,7 +642,7 @@
          </Pane>
          <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
          <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
-         <Label layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="158.0" text="Devolución libro">
+         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="200.0" stylesheets="@style.css" text="Devolución libro">
             <font>
                <Font name="Corbel Bold" size="19.0" />
             </font>
@@ -640,17 +655,17 @@
                      <Font name="Myanmar Text Bold" size="21.0" />
                   </font>
                </Label>
-               <Button id="btnMenu" fx:id="btnUsuariosPrincipal11" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="151.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnDevolPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosLibros11" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="201.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+               <Button id="btnMenu" fx:id="btnDevolLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
                   <font>
                      <Font name="Myanmar Text Bold" size="13.0" />
                   </font>
                </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_home.png" />
                   </image>
@@ -658,7 +673,7 @@
                      <Bloom />
                   </effect>
                </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@img/ico_libro.png" />
                   </image>
@@ -668,7 +683,7 @@
                </ImageView>
             </children>
          </Pane>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnDevolDevolver" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
@@ -676,12 +691,12 @@
                <Insets bottom="5.0" top="1.0" />
             </padding>
          </Button>
-         <Button id="btnMenu" fx:id="btnPrincipalUsuarios11" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnDevolUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE" wrapText="true">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@img/ico_cuenta.png" />
             </image>
@@ -705,18 +720,23 @@
                <Image url="@img/background/lib.png" />
             </image>
          </ImageView>
-         <Button id="btnMenu" fx:id="btnLibrosPrestamos1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="299.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+         <Button id="btnMenu" fx:id="btnDevolPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
             <font>
                <Font name="Myanmar Text Bold" size="13.0" />
             </font>
          </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@img/ico_calendar.png" />
             </image>
             <effect>
                <Bloom />
             </effect>
+         </ImageView>
+         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
+            <image>
+               <Image url="@img/background/bibliotecas1024x512.png" />
+            </image>
          </ImageView>
       </children>
    </Pane>
