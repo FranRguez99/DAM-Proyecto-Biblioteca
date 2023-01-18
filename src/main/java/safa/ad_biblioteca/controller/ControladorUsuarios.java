@@ -4,6 +4,9 @@ import safa.ad_biblioteca.model.Conexion;
 
 public class ControladorUsuarios {
 
+    // Elementos JavaFX
+
+
     Conexion conexion;
 
 
