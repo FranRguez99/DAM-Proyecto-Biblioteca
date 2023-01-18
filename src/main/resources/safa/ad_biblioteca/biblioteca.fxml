@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -14,107 +21,598 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.controller.ControladorPrincipal">
-   <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
-      <ImageView fitHeight="274.0" fitWidth="310.0" layoutX="525.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@img/background/pngwing.com.png" />
-      </ImageView>
-      <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
-         <Label layoutX="350.0" stylesheets="@style.css" text="iLib - Principal " textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="21.0" />
-            </font>
-         </Label>
-      </Pane>
-      <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-      <Label id="txtSeccion" layoutX="240.0" layoutY="96.0" prefHeight="27.0" prefWidth="148.0" stylesheets="@style.css" text="Bienvenido">
-         <font>
-            <Font name="Arial Black" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="279.0" text="• Préstamos">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="298.0" text="• Devoluciones ">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="317.0" text="• Registro de Usuarios y Libros Nuevos">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="336.0" text="• Edición de Usuarios y Libros existentes">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="355.0" text="• Eliminar todo tipo de Registros ">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="260.0" layoutY="374.0" text="• Gestión de retrasos">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-      </Label>
-      <Pane id="menuLateral" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" stylesheets="@style.css">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.controller.ControladorPrincipal">
+   <children>
+      <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
          <children>
-            <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-            <Label id="iLib" layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+            <ImageView fitHeight="274.0" fitWidth="310.0" layoutX="525.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/background/pngwing.com.png" />
+               </image>
+            </ImageView>
+            <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
+               <children>
+                  <Label layoutX="350.0" stylesheets="@style.css" text="iLib - Principal " textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <Label id="txtSeccion" layoutX="240.0" layoutY="96.0" prefHeight="27.0" prefWidth="148.0" stylesheets="@style.css" text="Bienvenido">
                <font>
-                  <Font name="Myanmar Text Bold" size="21.0" />
+                  <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <Button id="btnMenu" fx:id="btnPrincipalLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+            <Label layoutX="260.0" layoutY="279.0" text="• Préstamos">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="298.0" text="• Devoluciones ">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="317.0" text="• Registro de Usuarios y Libros Nuevos">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="336.0" text="• Edición de Usuarios y Libros existentes">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="355.0" text="• Eliminar todo tipo de Registros ">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="260.0" layoutY="374.0" text="• Gestión de retrasos">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+            <Pane id="menuLateral" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" stylesheets="@style.css">
+               <children>
+                  <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
+                  <Label id="iLib" layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnMenu" fx:id="btnPrincipalLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" onAction="#verLibros" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnPrincipalPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" onAction="#verPrestamos" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnPrincipalDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" onAction="#verDevoluciones" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnPrincipalUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" onAction="#verUsuarios" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_libro.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendar.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendarOK.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_cuenta.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="24.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/background/bibliotecas1024x512.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Text layoutX="240.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de gestión para biblioteca pública. Controle y administre de forma óptima y fácil el flujo de préstamos y devoluciones de libros." textAlignment="JUSTIFY" wrappingWidth="325.0">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="240.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esta herramienta le permitirá llevar el control completo y detallado de su biblioteca, tendrá acceso a herramientas especiales para tareas específicas, como son:" textAlignment="JUSTIFY" wrappingWidth="325.0">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
+         <children>
+            <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="350.0" prefHeight="44.0" stylesheets="@style.css" text="iLib - Libros " textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <TextField layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
+            <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+            <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
+               <font>
+                  <Font name="Corbel Bold" size="19.0" />
+               </font>
+            </Label>
+            <Pane id="menuLateral" layoutX="14.0" prefHeight="421.0" prefWidth="210.0" stylesheets="@style.css">
+               <children>
+                  <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
+                  <Label id="iLib" layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnMenu" fx:id="btnLibrosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnLibrosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnLibrosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnLibrosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_home.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendar.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendarOK.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_cuenta.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnPrincipalPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnLibrosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnPrincipalDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnLibrosModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnPrincipalUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnLibrosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
             </Button>
-            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
                <image>
-                  <Image url="@img/ico_libro.png" />
+                  <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
-               <effect>
-                  <Bloom />
-               </effect>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Pane>
+      <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+         <children>
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="350.0" stylesheets="@style.css" text="iLib - Usuarios" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <TextField editable="false" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el DNI del usuario a buscar" />
+            <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+            <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="111.0" stylesheets="@style.css" text="Usuarios">
+               <font>
+                  <Font name="Corbel Bold" size="19.0" />
+               </font>
+            </Label>
+            <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
+                  <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnMenu" fx:id="btnUsuariosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnUsuariosLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnUsuariosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnUsuariosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_home.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_libro.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendar.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendarOK.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="btnMenu" fx:id="btnUsuariosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <Button id="btnMenu" fx:id="btnUsuariosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <Button id="btnMenu" fx:id="btnUsuariosModif" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <Button id="btnMenu" fx:id="btnUsuariosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
                <image>
-                  <Image url="@img/ico_calendar.png" />
+                  <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
-               <effect>
-                  <Bloom />
-               </effect>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/ico_calendarOK.png" />
-               </image>
-               <effect>
-                  <Bloom />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+         </children>
+      </Pane>
+      <Pane id="panel" fx:id="panelRegistroUsuarios" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
+         <children>
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="286.0" stylesheets="@style.css" text="iLib - Registro de usuario" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <Separator id="separator" blendMode="GREEN" layoutX="405.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
+            <Label id="txtSeccion" layoutX="22.0" layoutY="95.0" prefHeight="27.0" prefWidth="265.0" stylesheets="@style.css" text="Registrar nuevo usuario">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="DNI">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Apellidos">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Nombre">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Domicilio">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Teléfono">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Email">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
+            <TextField layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
+            <TextField layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
+            <TextField layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
+            <TextField layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
+            <TextField layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
+            <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button id="btnMenu" fx:id="btnRegUsuarioVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane id="principal" fx:id="panelRegistroLibros" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+         <children>
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="286.0" stylesheets="@style.css" text="iLib - Registro de libros" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <Separator id="separator" blendMode="GREEN" layoutX="372.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
+            <Label id="txtSeccion" layoutX="20.0" layoutY="95.0" prefHeight="27.0" prefWidth="247.0" stylesheets="@style.css" text="Registrar nuevo libro">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="ISBN Libro">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="239.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Autor">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="50.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Título">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Idioma">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de páginas">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="460.0" layoutY="239.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de ejemplares">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="50.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el ISBN del libro" />
+            <TextField layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el título del libro" />
+            <TextField layoutX="50.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el autor del libro" />
+            <TextField layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el idioma del libro" />
+            <TextField layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de páginas del libro" />
+            <TextField layoutX="460.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de ejemplares del libro" />
+            <Button id="btnMenu" fx:id="btnRegLibREgistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button id="btnMenu" fx:id="btnRegLibVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label id="letreros" layoutX="48.0" layoutY="299.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Categoría">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="51.0" layoutY="325.0" prefHeight="31.0" prefWidth="240.0" promptText="Seleccione una categoría" />
+         </children>
+      </Pane>
+      <Pane id="principal" fx:id="panelPrestamos" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+         <children>
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="324.0" stylesheets="@style.css" text="iLib - Préstamos" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
+            <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="188.0" stylesheets="@style.css" text="Nuevo préstamo">
+               <font>
+                  <Font name="Corbel Bold" size="19.0" />
+               </font>
+            </Label>
+            <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
+                  <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnMenu" fx:id="btnUsuariosPrincipal1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnPrestamosDevol" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_home.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_libro.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_calendarOK.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="btnMenu" fx:id="btnPrestamosPrestar" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <Button id="btnMenu" fx:id="btnPrestamosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/ico_cuenta.png" />
                </image>
@@ -122,622 +620,139 @@
                   <Bloom />
                </effect>
             </ImageView>
-            <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="24.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+            <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
+            <Label id="letreros" layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="DNI Usuario">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="542.0" layoutY="241.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="ISBN Libro">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="322.0" fitWidth="399.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/background/lib.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
                <image>
                   <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Text layoutX="240.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de gestión para biblioteca pública. Controle y administre de forma óptima y fácil el flujo de préstamos y devoluciones de libros." textAlignment="JUSTIFY" wrappingWidth="325.0">
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font>
-      </Text>
-      <Text layoutX="240.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esta herramienta le permitirá llevar el control completo y detallado de su biblioteca, tendrá acceso a herramientas especiales para tareas específicas, como son:" textAlignment="JUSTIFY" wrappingWidth="325.0">
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font>
-      </Text>
-   </Pane>
-   <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
-      <children>
-         <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="350.0" prefHeight="44.0" stylesheets="@style.css" text="iLib - Libros " textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
-         <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
-         <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
-            <font>
-               <Font name="Corbel Bold" size="19.0" />
-            </font>
-         </Label>
-         <Pane id="menuLateral" layoutX="14.0" prefHeight="421.0" prefWidth="210.0" stylesheets="@style.css">
-            <children>
-               <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-               <Label id="iLib" layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-               <Button id="btnMenu" fx:id="btnLibrosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnLibrosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnLibrosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnLibrosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_home.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_calendar.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_calendarOK.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_cuenta.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-            </children>
-         </Pane>
-         <Button id="btnMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnLibrosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnLibrosModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnLibrosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
-            <image>
-               <Image url="@img/background/bibliotecas1024x512.png" />
-            </image>
-         </ImageView>
-      </children>
-   </Pane>
-   <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
-      <children>
-         <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="350.0" stylesheets="@style.css" text="iLib - Usuarios" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField editable="false" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el DNI del usuario a buscar" />
-         <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
-         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="111.0" stylesheets="@style.css" text="Usuarios">
-            <font>
-               <Font name="Corbel Bold" size="19.0" />
-            </font>
-         </Label>
-         <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-               <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-               <Button id="btnMenu" fx:id="btnUsuariosPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnUsuariosDevoluciones" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_home.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_libro.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_calendar.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_calendarOK.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-            </children>
-         </Pane>
-         <Button id="btnMenu" fx:id="btnUsuariosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnUsuariosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnUsuariosModif" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnUsuariosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
-            <image>
-               <Image url="@img/background/bibliotecas1024x512.png" />
-            </image>
-         </ImageView>
-      </children>
-   </Pane>
-   <Pane id="principal" fx:id="panelRegistroUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
-      <children>
-         <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="286.0" stylesheets="@style.css" text="iLib - Registro de usuario" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <Separator id="separator" blendMode="GREEN" layoutX="405.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
-         <Label id="txtSeccion" layoutX="22.0" layoutY="95.0" prefHeight="27.0" prefWidth="265.0" stylesheets="@style.css" text="Registrar nuevo usuario">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" text="DNI" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" text="Apellidos" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" text="Nombre" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" text="Domicilio" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" text="Teléfono" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" text="Email" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <TextField layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
-         <TextField layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
-         <TextField layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
-         <TextField layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
-         <TextField layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
-         <TextField layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
-         <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <Button id="btnMenu" fx:id="btnRegUsuarioVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-      </children>
-   </Pane>
-   <Pane id="principal" fx:id="panelRegistroLibros" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
-      <children>
-         <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="286.0" stylesheets="@style.css" text="iLib - Registro de libros" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <Separator id="separator" blendMode="GREEN" layoutX="372.0" layoutY="130.0" orientation="VERTICAL" prefHeight="220.0" prefWidth="10.0" stylesheets="@style.css" />
-         <Label id="txtSeccion" layoutX="20.0" layoutY="95.0" prefHeight="27.0" prefWidth="247.0" stylesheets="@style.css" text="Registrar nuevo libro">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" text="ISBN Libro" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="239.0" prefHeight="25.0" prefWidth="200.0" text="Autor" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="50.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" text="Título" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" text="Idioma" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" text="Número de páginas" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="460.0" layoutY="239.0" prefHeight="25.0" prefWidth="200.0" text="Número de ejemplares" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <TextField layoutX="50.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el ISBN del libro" />
-         <TextField layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el título del libro" />
-         <TextField layoutX="50.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el autor del libro" />
-         <TextField layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el idioma del libro" />
-         <TextField layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de páginas del libro" />
-         <TextField layoutX="460.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de ejemplares del libro" />
-         <Button id="btnMenu" fx:id="btnRegLibREgistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <Button id="btnMenu" fx:id="btnRegLibVolver" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Volver" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <Label layoutX="48.0" layoutY="299.0" prefHeight="25.0" prefWidth="200.0" text="Categoría" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <ComboBox layoutX="51.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Seleccione una categoría" />
-      </children>
-   </Pane>
-   <Pane id="principal" fx:id="panelPrestamos" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
-      <children>
-         <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="324.0" stylesheets="@style.css" text="iLib - Préstamos" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
-         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="188.0" stylesheets="@style.css" text="Nuevo préstamo">
-            <font>
-               <Font name="Corbel Bold" size="19.0" />
-            </font>
-         </Label>
-         <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-               <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-               <Button id="btnMenu" fx:id="btnUsuariosPrincipal1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnPrestamosDevol" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Devoluciones" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_home.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_libro.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_calendarOK.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-            </children>
-         </Pane>
-         <Button id="btnMenu" fx:id="btnPrestamosPrestar" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnPrestamosUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@img/ico_cuenta.png" />
-            </image>
-            <effect>
-               <Bloom />
-            </effect>
-         </ImageView>
-         <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
-         <Label layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" text="DNI Usuario" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="542.0" layoutY="241.0" prefHeight="22.0" prefWidth="111.0" text="ISBN Libro" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <ImageView fitHeight="322.0" fitWidth="399.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@img/background/lib.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
-            <image>
-               <Image url="@img/background/bibliotecas1024x512.png" />
-            </image>
-         </ImageView>
-      </children>
-   </Pane>
-   <Pane id="principal" fx:id="panelDevol" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css">
-      <children>
-         <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Label id="iLib" layoutX="316.0" stylesheets="@style.css" text="iLib - Devoluciones" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-            </children>
-         </Pane>
-         <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-         <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
-         <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="200.0" stylesheets="@style.css" text="Devolución libro">
-            <font>
-               <Font name="Corbel Bold" size="19.0" />
-            </font>
-         </Label>
-         <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
-            <children>
-               <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
-               <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="21.0" />
-                  </font>
-               </Label>
-               <Button id="btnMenu" fx:id="btnDevolPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <Button id="btnMenu" fx:id="btnDevolLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
-                  <font>
-                     <Font name="Myanmar Text Bold" size="13.0" />
-                  </font>
-               </Button>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_home.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-               <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/ico_libro.png" />
-                  </image>
-                  <effect>
-                     <Bloom />
-                  </effect>
-               </ImageView>
-            </children>
-         </Pane>
-         <Button id="btnMenu" fx:id="btnDevolDevolver" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-            <padding>
-               <Insets bottom="5.0" top="1.0" />
-            </padding>
-         </Button>
-         <Button id="btnMenu" fx:id="btnDevolUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE" wrapText="true">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@img/ico_cuenta.png" />
-            </image>
-            <effect>
-               <Bloom />
-            </effect>
-         </ImageView>
-         <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
-         <Label layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" text="DNI Usuario" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <Label layoutX="542.0" layoutY="241.0" prefHeight="22.0" prefWidth="111.0" text="ISBN Libro" textFill="#008452">
-            <font>
-               <Font name="Corbel Bold" size="18.0" />
-            </font>
-         </Label>
-         <ImageView fitHeight="322.0" fitWidth="399.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@img/background/lib.png" />
-            </image>
-         </ImageView>
-         <Button id="btnMenu" fx:id="btnDevolPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
-            <font>
-               <Font name="Myanmar Text Bold" size="13.0" />
-            </font>
-         </Button>
-         <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@img/ico_calendar.png" />
-            </image>
-            <effect>
-               <Bloom />
-            </effect>
-         </ImageView>
-         <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
-            <image>
-               <Image url="@img/background/bibliotecas1024x512.png" />
-            </image>
-         </ImageView>
-      </children>
-   </Pane>
+      <Pane id="principal" fx:id="panelDevol" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css">
+         <children>
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Label id="iLib" layoutX="316.0" stylesheets="@style.css" text="iLib - Devoluciones" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
+            <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
+            <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="200.0" stylesheets="@style.css" text="Devolución libro">
+               <font>
+                  <Font name="Corbel Bold" size="19.0" />
+               </font>
+            </Label>
+            <Pane id="paneIzdoPpal" layoutX="14.0" prefHeight="420.0" prefWidth="210.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
+               <children>
+                  <Separator layoutX="16.0" layoutY="60.0" prefHeight="2.0" prefWidth="178.0" />
+                  <Label layoutX="87.0" layoutY="14.0" stylesheets="@style.css" text="iLib" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnMenu" fx:id="btnDevolPrincipal" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="169.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Principal" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button id="btnMenu" fx:id="btnDevolLibros" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="15.0" layoutY="219.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Libros" textFill="WHITE">
+                     <font>
+                        <Font name="Myanmar Text Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_home.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ico_libro.png" />
+                     </image>
+                     <effect>
+                        <Bloom />
+                     </effect>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button id="btnMenu" fx:id="btnDevolDevolver" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="1.0" />
+               </padding>
+            </Button>
+            <Button id="btnMenu" fx:id="btnDevolUsuarios" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="269.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Usuarios" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/ico_cuenta.png" />
+               </image>
+               <effect>
+                  <Bloom />
+               </effect>
+            </ImageView>
+            <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
+            <Label id="letreros" layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="DNI Usuario">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label id="letreros" layoutX="542.0" layoutY="241.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="ISBN Libro">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="322.0" fitWidth="399.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/background/lib.png" />
+               </image>
+            </ImageView>
+            <Button id="btnMenu" fx:id="btnDevolPrestamos" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="29.0" layoutY="319.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" stylesheets="@style.css" text=" Préstamos" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="164.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/ico_calendar.png" />
+               </image>
+               <effect>
+                  <Bloom />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
+               <image>
+                  <Image url="@img/background/bibliotecas1024x512.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
 </Pane>
