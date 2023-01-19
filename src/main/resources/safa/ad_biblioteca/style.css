@@ -16,3 +16,10 @@
 #barraSuperior{
     -fx-background-color :  #008452;
 }
+#txtSeccion {
+    -fx-font-family: "Arial Black";
+}
+
+#letreros{
+    -fx-text-fill: #008452;
+}
