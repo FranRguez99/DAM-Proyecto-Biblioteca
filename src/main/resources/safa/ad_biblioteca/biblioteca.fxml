@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -21,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
    <children>
       <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
          <children>
@@ -363,7 +356,7 @@
                   <Insets bottom="5.0" top="1.0" />
                </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnUsuariosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnUsuariosNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#nuevoUsuario" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Nuevo" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -371,7 +364,7 @@
                   <Insets bottom="5.0" top="1.0" />
                </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnUsuariosModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnUsuariosModificar" alignment="CENTER" contentDisplay="CENTER" layoutX="454.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#modificarUsuario" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Modificar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -379,7 +372,7 @@
                   <Insets bottom="5.0" top="1.0" />
                </padding>
             </Button>
-            <Button id="btnMenu" fx:id="btnUsuariosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnUsuariosBorrar" alignment="CENTER" contentDisplay="CENTER" layoutX="608.0" layoutY="373.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#borrarUsuario" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Borrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -442,13 +435,13 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
-            <TextField layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
-            <TextField layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
-            <TextField layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
-            <TextField layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
-            <TextField layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
-            <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
+            <TextField fx:id="tfDNI" layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
+            <TextField fx:id="tfNombre" layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
+            <TextField fx:id="tfApellidos" layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
+            <TextField fx:id="tfDomicilio" layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
+            <TextField fx:id="tfTelefono" layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
+            <TextField fx:id="tfEmail" layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
+            <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" onAction="#aceptarUsuarios" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
