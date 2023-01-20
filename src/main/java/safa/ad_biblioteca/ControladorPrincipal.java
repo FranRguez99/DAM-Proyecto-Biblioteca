@@ -214,6 +214,12 @@ public class ControladorPrincipal implements Initializable {
         panelRegistroLibros.setVisible(true);
     }
 
+    @FXML
+    void volverLibros(ActionEvent event) {
+        verLibros();
+        // Vaciar campos
+    }
+
     ArrayList<Object> leeValoresLibro() {
         ArrayList<Object> libros = new ArrayList<Object>();
         libros.add(leerISBN());
@@ -293,8 +299,12 @@ public class ControladorPrincipal implements Initializable {
     /* MÉTODOS PESTAÑA USUARIO */
 
     @FXML
-    void aceptarUsuarios(ActionEvent event) {
-
+    void aceptarUsuarios(ActionEvent event) throws SQLException {
+        if (editaUsuario){
+            // todo
+        } else {
+            insertarUsuario();
+        }
     }
 
     @FXML
@@ -319,6 +329,17 @@ public class ControladorPrincipal implements Initializable {
         panelRegistroUsuarios.setVisible(true);
     }
 
+    @FXML
+    void volverUsuario(ActionEvent event) {
+        verUsuarios();
+        tfDNI.setText("");
+        tfNombre.setText("");
+        tfApellidos.setText("");
+        tfDomicilio.setText("");
+        tfTelefono.setText("");
+        tfEmail.setText("");
+    }
+
     String leerCampo(String nombreCampo, String texto, String criterioValidacion) {
         if (texto.matches(criterioValidacion)) {
             return texto;
@@ -327,16 +348,14 @@ public class ControladorPrincipal implements Initializable {
         }
     }
 
-// Prueba
-
     ArrayList<Object> leerValoresUsuario() {
         ArrayList<Object> valores = new ArrayList<Object>();
-        valores.add(leerCampo("DNI", tfDNI.getText(), "[0-9]{8}[A-Za-z]"));
+        valores.add(leerCampo("DNI", tfDNI.getText(), "[0-9]{8}[A-Za-z]")); // Criterio: Que tenga formato de DNI
         valores.add(leerCampo("Nombre", tfNombre.getText(), ".{1,20}"));
         valores.add(leerCampo("Apellidos", tfApellidos.getText(), ".{1,40}"));
         valores.add(leerCampo("Domicilio", tfDomicilio.getText(), ".{1,40}"));
-        valores.add(leerCampo("Telefono", tfTelefono.getText(), "^[0-9]{9}$"));
-        valores.add(leerCampo("Email", tfEmail.getText(), "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"));
+        valores.add(leerCampo("Telefono", tfTelefono.getText(), "^[0-9]{9}$")); // Criterio: que sean 9 cifras
+        valores.add(leerCampo("Email", tfEmail.getText(), "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")); // Criterio: Que tenga formato de email
         return valores;
     }
 
@@ -373,7 +392,7 @@ public class ControladorPrincipal implements Initializable {
     }
 
     private boolean compruebaTelefono(String telefono, StringBuilder mensajeError) {
-        if(telefono == null) {
+        if (telefono == null) {
             mensajeError.append("Teléfono (9 dígitos)\n");
             return true;
         }
@@ -381,7 +400,7 @@ public class ControladorPrincipal implements Initializable {
     }
 
     private boolean compruebaEmail(String email, StringBuilder mensajeError) {
-        if(email == null) {
+        if (email == null) {
             mensajeError.append("Email (Debe tener un formato válido)\n");
             return true;
         }
@@ -399,7 +418,7 @@ public class ControladorPrincipal implements Initializable {
         hayError = compruebaTelefono((String) valores.get(4), mensajeError) ? true : hayError;
         hayError = compruebaEmail((String) valores.get(5), mensajeError) ? true : hayError;
 
-        if (hayError){
+        if (hayError) {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Error");
             error.setHeaderText("CAMPOS ERRÓNEOS");
@@ -409,33 +428,27 @@ public class ControladorPrincipal implements Initializable {
         return hayError;
     }
 
-
     void insertarUsuario() throws SQLException {
-        // Añadir un if comprobando el mensaje de error
         ArrayList<Object> valores = leerValoresUsuario();
-        // Dar como parámetro al if la lista
-
-        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = conexion.conexion.prepareStatement(sql);
-
-        /* todo
-        stmt.setString(1, value1);
-        stmt.setString(2, value2);
-        stmt.setString(3, value3);
-        stmt.setString(4, value4);
-        stmt.setString(5, value5);
-        stmt.setString(6, value6);
-        stmt.setInt(7, value7);
-        */
-
-        stmt.executeUpdate(); // Ejecutar la consulta
-
-        // Cerrar las conexiones
-        stmt.close();
-        conexion.conexion.close();
+        if (!mensajeErrorUsuario(valores)) {
+            consultaInsertarUsuario(valores);
+        }
     }
 
+    void consultaInsertarUsuario(ArrayList<Object> valores) throws SQLException {
+        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email) " +
+                "VALUES (?, ?, ?, ?, ?, ?)"; // Consulta para insertar usuarios en la base de datos
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            int i = 1;
+            for (Object valor : valores) {
+                stmt.setString(i++, (String) valor);
+            }
+            stmt.executeUpdate(); // Ejecutar la consulta
+        }
+    }
+
+
+    /* BOTONES DE NAVEGACIÓN */
     @FXML
     void verPrincipal() {
         panelPrincipal.setVisible(true);
@@ -479,20 +492,8 @@ public class ControladorPrincipal implements Initializable {
         panelPrestamos.setVisible(false);
         panelDevoluciones.setVisible(false);
         panelUsuarios.setVisible(true);
+        panelRegistroUsuarios.setVisible(false);
     }
-
-    @FXML
-    void volverLibros(ActionEvent event) {
-        verLibros();
-        // Vaciar campos
-    }
-
-    @FXML
-    void volverUsuario(ActionEvent event) {
-        verUsuarios();
-        // Vaciar campos
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
