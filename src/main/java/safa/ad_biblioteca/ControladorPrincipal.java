@@ -3,6 +3,7 @@ package safa.ad_biblioteca;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -185,33 +186,34 @@ public class ControladorPrincipal implements Initializable {
     Boolean editaUsuario;
     Boolean editaLibro;
 
-    //public ControladorPrincipal(ComboBox<?> cBoxCategoria) {
-      //  this.cBoxCategoria = cBoxCategoria;
-    //}
-
     // Métodos
     @FXML
     void aceptarLibros(ActionEvent event) {
 
     }
+
     @FXML
     void borrarLibro(ActionEvent event) {
 
     }
+
     @FXML
     void modificarLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
+
     @FXML
     void nuevoLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = false;
     }
+
     void cambiarVistaFormUsuarioL() {
         panelLibros.setVisible(false);
         panelRegistroLibros.setVisible(true);
     }
+
     ArrayList<Object> leeValoresLibro() {
         ArrayList<Object> libros = new ArrayList<Object>();
         libros.add(leerISBN());
@@ -223,7 +225,8 @@ public class ControladorPrincipal implements Initializable {
 
         return libros;
     }
-//AYUDA
+
+    //AYUDA
     String leerISBN() {
         String ISBN = tfISBN.getText();
         if (compruebaISBN(ISBN)) {
@@ -232,6 +235,7 @@ public class ControladorPrincipal implements Initializable {
             return null;
         }
     }
+
     boolean compruebaISBN(String ISBN) {
         return ISBN.length() <= 13; // Así??
     }
@@ -243,7 +247,8 @@ public class ControladorPrincipal implements Initializable {
     String leerAutor() {
         return tfAutor.getText();
     }
-// AYUDA
+
+    // AYUDA
     String leerCategoria() {
         return cBoxCategoria.getValue().toString();
     }
@@ -255,9 +260,11 @@ public class ControladorPrincipal implements Initializable {
     String leerPaginas() {
         return tfPaginas.getText();
     }
+
     String leerEjemplares() {
         return tfEjemplares.getText();
     }
+
     void insertarLibro() throws SQLException {
         ArrayList<Object> libros = leeValoresLibro(); //DUDA tngo q poner libros o valores como esta en tu insertarUsuario ¿
 
@@ -282,6 +289,9 @@ public class ControladorPrincipal implements Initializable {
         conexion.conexion.close();
 
     }
+
+    /* MÉTODOS PESTAÑA USUARIO */
+
     @FXML
     void aceptarUsuarios(ActionEvent event) {
 
@@ -309,55 +319,104 @@ public class ControladorPrincipal implements Initializable {
         panelRegistroUsuarios.setVisible(true);
     }
 
-    ArrayList<Object> leeValoresUsuario() {
-        ArrayList<Object> valores = new ArrayList<Object>();
-        valores.add(leerDNI());
-        valores.add(leerNombre());
-        valores.add(leerApellidos());
-        valores.add(leerDomicilio());
-        valores.add(leerTelefono());
-        valores.add(leerEmail());
-        return valores;
-    }
-
-    String leerDNI() {
-        String dni = tfDNI.getText();
-        if (compruebaDNI(dni)) {
-            return dni;
+    String leerCampo(String nombreCampo, String texto, String criterioValidacion) {
+        if (texto.matches(criterioValidacion)) {
+            return texto;
         } else {
             return null;
         }
     }
 
-    boolean compruebaDNI(String dni) {
-        return dni.length() == 9 && dni.matches("[0-9]{8}[A-Za-z]") && Character.isLetter(dni.charAt(8));
+
+
+    ArrayList<Object> leerValoresUsuario() {
+        ArrayList<Object> valores = new ArrayList<Object>();
+        valores.add(leerCampo("DNI", tfDNI.getText(), "[0-9]{8}[A-Za-z]"));
+        valores.add(leerCampo("Nombre", tfNombre.getText(), ".{1,20}"));
+        valores.add(leerCampo("Apellidos", tfApellidos.getText(), ".{1,40}"));
+        valores.add(leerCampo("Domicilio", tfDomicilio.getText(), ".{1,40}"));
+        valores.add(leerCampo("Telefono", tfTelefono.getText(), "^[0-9]{9}$"));
+        valores.add(leerCampo("Email", tfEmail.getText(), "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"));
+        return valores;
     }
 
-    String leerNombre() {
-        return tfNombre.getText();
+    private boolean compruebaDNI(String dni, StringBuilder mensajeError) {
+        if (dni == null) {
+            mensajeError.append("DNI (Introduzca un DNI válido)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerApellidos() {
-        return tfApellidos.getText();
+    private boolean compruebaNombre(String nombre, StringBuilder mensajeError) {
+        if (nombre == null) {
+            mensajeError.append("Nombre (No puede estar vacío. Máximo 20 caracteres)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerDomicilio() {
-        return tfDomicilio.getText();
+    private boolean compruebaApellidos(String apellidos, StringBuilder mensajeError) {
+        if (apellidos == null) {
+            mensajeError.append("Apellidos (No puede estar vacío. Máximo 40 caracteres)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerTelefono() {
-        return tfTelefono.getText();
+    private boolean compruebaDomicilio(String domicilio, StringBuilder mensajeError) {
+        if (domicilio == null) {
+            mensajeError.append("Domicilio (No puede estar vacío. Máximo 40 caracteres)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerEmail() {
-        return tfEmail.getText();
+    private boolean compruebaTelefono(String telefono, StringBuilder mensajeError) {
+        if(telefono == null) {
+            mensajeError.append("Teléfono (9 dígitos)\n");
+            return true;
+        }
+        return false;
     }
+
+    private boolean compruebaEmail(String email, StringBuilder mensajeError) {
+        if(email == null) {
+            mensajeError.append("Email (Debe tener un formato válido)\n");
+            return true;
+        }
+        return false;
+    }
+
+    boolean mensajeErrorUsuario(ArrayList<Object> valores) {
+        boolean hayError = false;
+        StringBuilder mensajeError = new StringBuilder();
+
+        hayError = compruebaDNI((String) valores.get(0), mensajeError) ? true : hayError;
+        hayError = compruebaNombre((String) valores.get(1), mensajeError) ? true : hayError;
+        hayError = compruebaApellidos((String) valores.get(2), mensajeError) ? true : hayError;
+        hayError = compruebaDomicilio((String) valores.get(3), mensajeError) ? true : hayError;
+        hayError = compruebaTelefono((String) valores.get(4), mensajeError) ? true : hayError;
+        hayError = compruebaEmail((String) valores.get(5), mensajeError) ? true : hayError;
+
+        if (hayError){
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Error");
+            error.setHeaderText("CAMPOS ERRÓNEOS");
+            error.setContentText("Hay error en los siguientes campos: " + mensajeError.toString());
+            error.showAndWait();
+        }
+        return hayError;
+    }
+
 
     void insertarUsuario() throws SQLException {
-        ArrayList<Object> valores = leeValoresUsuario();
+        // Añadir un if comprobando el mensaje de error
+        ArrayList<Object> valores = leerValoresUsuario();
+        // Dar como parámetro al if la lista
 
-        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email, sancionado) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conexion.conexion.prepareStatement(sql);
 
         /* todo
