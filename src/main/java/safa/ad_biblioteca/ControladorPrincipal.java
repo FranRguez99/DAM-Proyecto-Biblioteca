@@ -220,6 +220,7 @@ public class ControladorPrincipal implements Initializable {
         libros.add(leerCategoria());
         libros.add(leerIdioma());
         libros.add(leerPaginas());
+        libros.add(leerEjemplares());
 
         return libros;
     }
@@ -253,10 +254,10 @@ public class ControladorPrincipal implements Initializable {
     }
 
     String leerPaginas() {
-        return tfPaginas.getText();
+        return tfPaginas.getText(); // no se si es int
     }
     String leerEjemplares() {
-        return tfEjemplares.getText();
+        return tfEjemplares.getText(); // no se si es int
     }
     void insertarLibro() throws SQLException {
         ArrayList<Object> libros = leeValoresLibro(); //DUDA tngo q poner libros o valores como esta en tu insertarUsuario ¿

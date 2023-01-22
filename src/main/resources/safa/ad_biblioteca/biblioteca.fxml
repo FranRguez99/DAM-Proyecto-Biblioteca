@@ -147,7 +147,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
+      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
          <children>
             <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
                <children>
@@ -160,7 +160,7 @@
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
             <TextField layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
-            <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+            <TableView fx:id="tablaLibros" layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
             <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -387,7 +387,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="panel" fx:id="panelRegistroUsuarios" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+      <Pane id="panel" fx:id="panelRegistroUsuarios" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
          <children>
             <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
                <children>
@@ -453,7 +453,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane id="principal" fx:id="panelRegistroLibros" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css">
+      <Pane id="principal" fx:id="panelRegistroLibros" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
          <children>
             <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="51.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
                <children>
