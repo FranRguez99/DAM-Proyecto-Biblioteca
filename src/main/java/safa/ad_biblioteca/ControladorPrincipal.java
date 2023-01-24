@@ -1,12 +1,11 @@
 package safa.ad_biblioteca;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import safa.ad_biblioteca.model.Conexion;
 
@@ -183,6 +182,31 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     private TextField tfEjemplares;
 
+    @FXML
+    private TableView<?> tablaLibros;
+
+    @FXML
+    private TableColumn<?, ?> ISBNcol;
+
+
+    @FXML
+    private TableColumn<?, ?> tituloCol;
+
+    @FXML
+    private TableColumn<?, ?> autorCol;
+
+    @FXML
+    private TableColumn<?, ?> categoriaCol;
+
+    @FXML
+    private TableColumn<?, ?> idiomaCol;
+
+    @FXML
+    private TableColumn<?, ?> paginalCol;
+
+    @FXML
+    private TableColumn<?, ?> ejemplaresCol;
+
     // Atributos
     Conexion conexion = new Conexion();
     Boolean editaUsuario;
@@ -266,7 +290,10 @@ public class ControladorPrincipal implements Initializable {
         }
 
     }
- // Una clase LibroDAO (Data Access Object) que se encargue de realizar las operaciones CRUD con la base de datos.
+
+
+
+            // Una clase LibroDAO (Data Access Object) que se encargue de realizar las operaciones CRUD con la base de datos.
  // Esta clase tiene los métodos para insertar, actualizar y eliminar libros, así como un método para obtener todos los libros de la tabla
     public class LibroDAO {
         private Conexion conexion;
@@ -317,17 +344,19 @@ public class ControladorPrincipal implements Initializable {
                 Libro libro = new Libro(
                         resultado.getString("ISBN"),
                         resultado.getString("titulo"),
-                        resultado.getString("autor"),
                         resultado.getString("categoria"),
+                        resultado.getString("autor"),
                         resultado.getString("idioma"),
-                        resultado.getString("num_paginas"),
-                        resultado.getString("num_ejemplares")
+                        resultado.getString("paginas"),
+                        resultado.getString("ejemplares")
                 );
                 libros.add(libro);
             }
             return libros;
+
         }
     }
+
     @FXML
     void aceptarLibros(ActionEvent event) {
 
@@ -337,8 +366,6 @@ public class ControladorPrincipal implements Initializable {
     void borrarLibro(ActionEvent event) throws SQLException {
 
     }
-
-
 
     @FXML
     void modificarLibro(ActionEvent event) {
@@ -470,7 +497,7 @@ public class ControladorPrincipal implements Initializable {
                 statement.setString(5, libro.getIdioma());
                 statement.setString(6, libro.getPaginas());
                 statement.setString(7, libro.getEjemplares());
-                statement.executeUpdate();
+                statement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -480,6 +507,24 @@ public class ControladorPrincipal implements Initializable {
         //stmt.close();
         conexion.conexion.close();
 
+    }
+    public void actualizarLibro(Libro libro) throws SQLException {
+        String sql = "UPDATE libros SET titulo = ?, autor = ?, categoria = ?, idioma = ?, num_paginas = ?, num_ejemplares = ? WHERE ISBN = ?";
+        PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+        statement.setString(1, libro.getTitulo());
+        statement.setString(2, libro.getAutor());
+        statement.setString(3, libro.getCategoria());
+        statement.setString(4, libro.getIdioma());
+        statement.setString(5, libro.getPaginas());
+        statement.setString(6, libro.getEjemplares());
+        statement.setString(7, libro.getISBN());
+        statement.execute();
+    }
+    public void eliminarLibro(Libro libro) throws SQLException {
+        String sql = "DELETE FROM libros WHERE ISBN = ?";
+        PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+        statement.setString(1, libro.getISBN());
+        statement.execute();
     }
 
     /* MÉTODOS PESTAÑA USUARIO */
@@ -674,9 +719,9 @@ public class ControladorPrincipal implements Initializable {
     }
 
     @FXML
-    void volverLibros(ActionEvent event) {
-        verLibros();
-        // Vaciar campos formulario libros
+    void volverLibros() {
+
+        //* Vaciar campos formulario libros
         tfISBN.setText("");
         tfTitulo.setText("");
         tfAutor.setText("");
@@ -684,6 +729,7 @@ public class ControladorPrincipal implements Initializable {
         tfIdioma.setText("");
         tfPaginas.setText("");
         tfEjemplares.setText("");
+        panelPrincipal.setVisible(true);
     }
 
     @FXML
