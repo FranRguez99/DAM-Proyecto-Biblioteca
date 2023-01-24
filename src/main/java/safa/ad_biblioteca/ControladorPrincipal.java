@@ -12,8 +12,10 @@ import safa.ad_biblioteca.model.Conexion;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControladorPrincipal implements Initializable {
@@ -187,15 +189,156 @@ public class ControladorPrincipal implements Initializable {
     Boolean editaLibro;
 
     // Métodos
+
+    // Métodos pestaña Libros
+    public class Libro {  // No se si quitarle los private
+        private String ISBN;
+        private String titulo;
+        private String autor;
+        private String categoria;
+        private String idioma;
+        private String paginas;
+        private String ejemplares;
+
+        public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares) {
+            this.ISBN = ISBN;
+            this.titulo = titulo;
+            this.autor = autor;
+            this.categoria = categoria;
+            this.idioma = idioma;
+            this.paginas = paginas;
+            this.ejemplares = ejemplares;
+
+        }
+
+        public String getISBN() {
+            return ISBN;
+        }
+
+        public void setISBN(String ISBN) {
+            this.ISBN = ISBN;
+        }
+
+        public String getTitulo() {
+            return titulo;
+        }
+
+        public void setTitulo(String titulo) {
+            this.titulo = titulo;
+        }
+
+        public String getAutor() {
+            return autor;
+        }
+
+        public void setAutor(String autor) {
+            this.autor = autor;
+        }
+
+        public String getCategoria() {
+            return categoria;
+        }
+
+        public void setCategoria(String categoria) {
+            this.categoria = categoria;
+        }
+        public String getIdioma() {
+            return idioma;
+        }
+
+        public void setIdioma(String idioma) {
+            this.idioma = idioma;
+        }
+        public String getPaginas() {
+            return paginas;
+        }
+
+        public void setPaginas(String paginas) {
+            this.paginas = paginas;
+        }
+
+        public String getEjemplares() {
+            return ejemplares;
+        }
+
+        public void setEjemplares(String ejemplares) {
+            this.ejemplares = ejemplares;
+        }
+
+    }
+ // Una clase LibroDAO (Data Access Object) que se encargue de realizar las operaciones CRUD con la base de datos.
+ // Esta clase tiene los métodos para insertar, actualizar y eliminar libros, así como un método para obtener todos los libros de la tabla
+    public class LibroDAO {
+        private Conexion conexion;
+
+        public LibroDAO() {
+            conexion = new Conexion();
+        }
+
+        public void insertarLibro(Libro libro) throws SQLException {
+            String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, num_paginas, num_ejemplares) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+            statement.setString(1, libro.getISBN());
+            statement.setString(2, libro.getTitulo());
+            statement.setString(3, libro.getAutor());
+            statement.setString(4, libro.getCategoria());
+            statement.setString(5, libro.getIdioma());
+            statement.setString(6, libro.getPaginas());
+            statement.setString(7, libro.getEjemplares());
+            statement.executeUpdate();
+        }
+
+        public void actualizarLibro(Libro libro) throws SQLException {
+            String sql = "UPDATE libros SET titulo=?, autor=?, categoria=?, idioma=?, num_paginas=?, num_ejemplares=? WHERE ISBN=?";
+            PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+            statement.setString(1, libro.getTitulo());
+            statement.setString(2, libro.getAutor());
+            statement.setString(3, libro.getCategoria());
+            statement.setString(4, libro.getIdioma());
+            statement.setString(5, libro.getPaginas());
+            statement.setString(6, libro.getEjemplares());
+            statement.setString(7, libro.getISBN());
+            statement.executeUpdate();
+        }
+
+        public void eliminarLibro(String ISBN) throws SQLException {
+
+            String sql = "DELETE FROM libros WHERE ISBN=?";
+            PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+            statement.setString(1, ISBN);
+            statement.executeUpdate();
+        }
+
+        public List<Libro> obtenerLibros() throws SQLException {
+            List<Libro> libros = new ArrayList<>();
+            String sql = "SELECT ISBN, titulo, autor, categoria, idioma, num_paginas, num_ejemplares FROM libros";
+            ResultSet resultado = conexion.conexion.createStatement().executeQuery(sql);
+            while (resultado.next()) {
+                Libro libro = new Libro(
+                        resultado.getString("ISBN"),
+                        resultado.getString("titulo"),
+                        resultado.getString("autor"),
+                        resultado.getString("categoria"),
+                        resultado.getString("idioma"),
+                        resultado.getString("num_paginas"),
+                        resultado.getString("num_ejemplares")
+                );
+                libros.add(libro);
+            }
+            return libros;
+        }
+    }
     @FXML
     void aceptarLibros(ActionEvent event) {
 
     }
 
     @FXML
-    void borrarLibro(ActionEvent event) {
+    void borrarLibro(ActionEvent event) throws SQLException {
 
     }
+
+
 
     @FXML
     void modificarLibro(ActionEvent event) {
@@ -214,79 +357,127 @@ public class ControladorPrincipal implements Initializable {
         panelRegistroLibros.setVisible(true);
     }
 
-    ArrayList<Object> leeValoresLibro() {
-        ArrayList<Object> libros = new ArrayList<Object>();
-        libros.add(leerISBN());
-        libros.add(leerTitulo());
-        libros.add(leerAutor());
-        libros.add(leerCategoria());
-        libros.add(leerIdioma());
-        libros.add(leerPaginas());
-        libros.add(leerEjemplares());
-
-        return libros;
-    }
-
-    //AYUDA
-    String leerISBN() {
-        String ISBN = tfISBN.getText();
-        if (compruebaISBN(ISBN)) {
-            return ISBN;
+    String leerCampoLibro(String nombreCampo, String texto, String criterioValidacion) {
+        if (texto.matches(criterioValidacion)) {
+            return texto;
         } else {
             return null;
         }
     }
+    ArrayList<Object> leeValoresLibro() {
+        ArrayList<Object> libros = new ArrayList<Object>();
+        libros.add(leerCampoLibro("ISBN",tfISBN.getText(),".{1,13}"));
+        libros.add(leerCampoLibro("Titulo",tfTitulo.getText(),".{1,50}"));
+        libros.add(leerCampoLibro("Autor",tfAutor.getText(),".{1,50}"));
+        libros.add(leerCampoLibro("Categoria", (String) cBoxCategoria.getValue(),"^\\s*$"));
+        libros.add(leerCampoLibro("Idioma",tfIdioma.getText(),".{1,20}"));
+        libros.add(leerCampoLibro("Paginas",tfPaginas.getText(),".{1,3}"));
+        libros.add(leerCampoLibro("Ejemplares",tfEjemplares.getText(),".{1,3}"));
 
-    boolean compruebaISBN(String ISBN) {
-        return ISBN.length() <= 13; // Así??
+        return libros;
     }
 
-    String leerTitulo() {
-        return tfTitulo.getText();
+    private boolean compruebaISBN(String ISBN, StringBuilder mensajeError) {
+        if (ISBN == null) {
+            mensajeError.append("ISBN (Introduzca un ISBN válido)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerAutor() {
-        return tfAutor.getText();
+    private boolean compruebaTitulo(String Titulo, StringBuilder mensajeError) {
+        if (Titulo == null) {
+            mensajeError.append("Titulo (No puede estar vacío. Máximo 50 caracteres)\n");
+            return true;
+        }
+        return false;
+    }
+    private boolean compruebaAutor(String Autor, StringBuilder mensajeError) {
+        if (Autor == null) {
+            mensajeError.append("Autor (No puede estar vacío. Máximo 50 caracteres)\n");
+            return true;
+        }
+        return false;
     }
 
-    // AYUDA
-    String leerCategoria() {
-        return cBoxCategoria.getValue().toString();
+    private boolean compruebaCategoria(String Categoria, StringBuilder mensajeError) {
+        if (Categoria == null) {    // if (!cBoxCategoria.getSelectedItem().toString().matches("^\\s*$")) {
+
+            mensajeError.append("Categoría (Seleccione una categoría)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerIdioma() {
-        return tfIdioma.getText();
+    private boolean compruebaIdioma(String Idioma, StringBuilder mensajeError) {
+        if (Idioma == null) {
+            mensajeError.append("Idioma (No puede estar vacío. Máximo 20 caracteres)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerPaginas() {
-        return tfPaginas.getText(); // no se si es int
+    private boolean compruebaPaginas(String Paginas, StringBuilder mensajeError) {
+        if(Paginas == null) {
+            mensajeError.append("Páginas (No puede estar vacío.)\n");
+            return true;
+        }
+        return false;
     }
 
-    String leerEjemplares() {
-        return tfEjemplares.getText(); // no se si es int
+    private boolean compruebaEjemplares (String Ejemplares, StringBuilder mensajeError) {
+        if(Ejemplares == null) {
+            mensajeError.append("Ejemplares (No puede estar vacío.)\n");
+            return true;
+        }
+        return false;
     }
 
-    void insertarLibro() throws SQLException {
-        ArrayList<Object> libros = leeValoresLibro(); //DUDA tngo q poner libros o valores como esta en tu insertarUsuario ¿
+    boolean mensajeErrorLibro(ArrayList<Object>libros ) {
+        boolean hayError = false;
+        StringBuilder mensajeError = new StringBuilder();
 
-        String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = conexion.conexion.prepareStatement(sql);
+        hayError = compruebaISBN((String) libros.get(0), mensajeError) ? true : hayError;
+        hayError = compruebaTitulo((String) libros.get(1), mensajeError) ? true : hayError;
+        hayError = compruebaAutor((String) libros.get(2), mensajeError) ? true : hayError;
+        hayError = compruebaCategoria((String) libros.get(3), mensajeError) ? true : hayError;
+        hayError = compruebaIdioma((String) libros.get(4), mensajeError) ? true : hayError;
+        hayError = compruebaPaginas((String) libros.get(5), mensajeError) ? true : hayError;
+        hayError = compruebaEjemplares((String) libros.get(6), mensajeError) ? true : hayError;
 
-        /* todo
-        stmt.setString(1, );
-        stmt.setString(2, value2);
-        stmt.setString(3, value3);
-        stmt.setString(4, value4);
-        stmt.setString(5, value5);
-        stmt.setInt(6, value6);
-        stmt.setInt(7, value7);
-        */
 
-        stmt.executeUpdate(); // Ejecutar la consulta
+        if (hayError){
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Error");
+            error.setHeaderText("CAMPOS ERRÓNEOS");
+            error.setContentText("Hay error en los siguientes campos: " + mensajeError.toString());
+            error.showAndWait();
+        }
+        return hayError;
+    }
+    void insertarLibro(Libro libro) throws SQLException {
+        ArrayList<Object> libros = leeValoresLibro();
 
+        btnRegLibREgistrar.setOnAction(event -> {
+            try {
+                Conexion conexion = new Conexion();
+                String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, num_paginas, num_ejemplares) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement statement = conexion.conexion.prepareStatement(sql);
+                statement.setString(1, libro.getISBN());
+                statement.setString(2, libro.getTitulo());
+                statement.setString(3, libro.getAutor());
+                statement.setString(4, libro.getCategoria());
+                statement.setString(5, libro.getIdioma());
+                statement.setString(6, libro.getPaginas());
+                statement.setString(7, libro.getEjemplares());
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        });
         // Cerrar las conexiones
-        stmt.close();
+        //stmt.close();
         conexion.conexion.close();
 
     }
@@ -485,7 +676,14 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     void volverLibros(ActionEvent event) {
         verLibros();
-        // Vaciar campos
+        // Vaciar campos formulario libros
+        tfISBN.setText("");
+        tfTitulo.setText("");
+        tfAutor.setText("");
+        cBoxCategoria.setValue(null);
+        tfIdioma.setText("");
+        tfPaginas.setText("");
+        tfEjemplares.setText("");
     }
 
     @FXML
