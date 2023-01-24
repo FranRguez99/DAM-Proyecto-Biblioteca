@@ -301,15 +301,17 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     void aceptarUsuarios(ActionEvent event) throws SQLException {
         if (editaUsuario){
-            // todo
+            actualizarUsuario();
         } else {
             insertarUsuario();
         }
+        volverUsuario();
     }
 
     @FXML
-    void borrarUsuario(ActionEvent event) {
-
+    void borrarUsuario() throws SQLException {
+        eliminarUsuario("77864953V");
+        // todo lectura de la tabla para recoger el valor del dni de la misma
     }
 
     @FXML
@@ -330,7 +332,7 @@ public class ControladorPrincipal implements Initializable {
     }
 
     @FXML
-    void volverUsuario(ActionEvent event) {
+    void volverUsuario() {
         verUsuarios();
         tfDNI.setText("");
         tfNombre.setText("");
@@ -428,6 +430,7 @@ public class ControladorPrincipal implements Initializable {
         return hayError;
     }
 
+    // INSERT
     void insertarUsuario() throws SQLException {
         ArrayList<Object> valores = leerValoresUsuario();
         if (!mensajeErrorUsuario(valores)) {
@@ -446,6 +449,36 @@ public class ControladorPrincipal implements Initializable {
             stmt.executeUpdate(); // Ejecutar la consulta
         }
     }
+
+    // UPDATE
+    void actualizarUsuario() throws SQLException {
+        ArrayList<Object> valores = leerValoresUsuario();
+        if (!mensajeErrorUsuario(valores)) {
+            consultaActualizarUsuario(valores);
+        }
+    }
+
+    void consultaActualizarUsuario(ArrayList<Object> valores) throws SQLException {
+        String sql = "UPDATE usuarios SET nombre=?, apellidos=?, domicilio=?, telefono=?, email=? WHERE DNI=?";
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            int i = 1;
+            for (int j=1; j<valores.size(); j++) {
+                stmt.setString(i++, (String) valores.get(j));
+            }
+            stmt.setString(i, (String) valores.get(0));
+            stmt.executeUpdate();
+        }
+    }
+
+    // DELETE
+    void eliminarUsuario(String DNI) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE DNI = ?";
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            stmt.setString(1, DNI);
+            stmt.executeUpdate();
+        }
+    }
+
 
 
     /* BOTONES DE NAVEGACIÓN */
