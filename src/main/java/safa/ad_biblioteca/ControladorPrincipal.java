@@ -1,6 +1,5 @@
 package safa.ad_biblioteca;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -215,7 +214,8 @@ public class ControladorPrincipal implements Initializable {
 
     // Métodos
 
-    // Métodos pestaña Libros
+
+    // Clase Libro
     public class Libro {  // No se si quitarle los private
         private String ISBN;
         private String titulo;
@@ -291,23 +291,26 @@ public class ControladorPrincipal implements Initializable {
         }
 
     }
-
-
-
-
-
+    /* MÉTODOS PESTAÑA LIBROS */
     @FXML
-    void aceptarLibros(ActionEvent event) {
-
+    void aceptarLibros(ActionEvent event) throws SQLException {
+        if (editaLibro){
+            actualizarLibro();
+        } else {
+            insertarLibro();
+        } volverLibros();
     }
 
     @FXML
-    void borrarLibro(ActionEvent event) {
-
+    void borrarLibro(ActionEvent event) throws SQLException {
+        eliminarLibro("77864953V");
+        // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
 
+
+
     @FXML
-    void modificarLibro(ActionEvent event) {
+    void modificarLibro() {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
@@ -318,8 +321,30 @@ public class ControladorPrincipal implements Initializable {
         editaLibro = false;
     }
 
+    void cambiarVistaFormUsuarioL() {
+        panelLibros.setVisible(false);
+        panelRegistroLibros.setVisible(true);
+    }
+    void cambiarVistaVolverUsuario() {
+        panelRegistroLibros.setVisible(false);
+        panelLibros.setVisible(true);
+    }
 
-    String leerCampoLibro(String nombreCampo, String texto, String criterioValidacion) {
+    @FXML
+    void volverLibros() {
+        cambiarVistaVolverUsuario();
+        //* Vaciar campos formulario libros
+        tfISBN.setText("");
+        tfTitulo.setText("");
+        tfAutor.setText("");
+        cBoxCategoria.setValue(null);
+        tfIdioma.setText("");
+        tfPaginas.setText("");
+        tfEjemplares.setText("");
+        panelPrincipal.setVisible(true);
+    }
+
+    String leerCampoLibro(String nombreCampoL, String texto, String criterioValidacion) {
         if (texto.matches(criterioValidacion)) {
             return texto;
         } else {
@@ -328,7 +353,7 @@ public class ControladorPrincipal implements Initializable {
     }
     ArrayList<Object> leeValoresLibro() {
         ArrayList<Object> libros = new ArrayList<Object>();
-        libros.add(leerCampoLibro("ISBN",tfISBN.getText(),".{1,13}"));
+        libros.add(leerCampoLibro("ISBN",tfISBN.getText(),".{10,13}"));
         libros.add(leerCampoLibro("Titulo",tfTitulo.getText(),".{1,50}"));
         libros.add(leerCampoLibro("Autor",tfAutor.getText(),".{1,50}"));
         libros.add(leerCampoLibro("Categoria", (String) cBoxCategoria.getValue(),"^\\s*$"));
@@ -420,6 +445,55 @@ public class ControladorPrincipal implements Initializable {
 //    @FXML
   //  void insertarLibro(ActionEvent event) {
     //}
+
+    // INSERT
+    private void insertarLibro() throws SQLException {
+        ArrayList<Object> libros = leeValoresLibro();
+        if (!mensajeErrorLibro(libros)) {
+            consultaInsertarLibro(libros);
+        }
+    }
+
+    private void consultaInsertarLibro(ArrayList<Object> libros) throws SQLException {
+        String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libros en la base de datos
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            int i = 1;
+            for (Object valor : libros) {
+                stmt.setString(i++, (String) valor);
+            }
+            stmt.executeUpdate(); // Ejecutar la consulta
+        }
+    }
+
+    // UPDATE
+    private void actualizarLibro() throws SQLException {
+        ArrayList<Object> libros = leeValoresLibro();
+        if (!mensajeErrorUsuario(libros)) {
+            consultaActualizarLibro(libros);
+        }
+    }
+
+    private void consultaActualizarLibro(ArrayList<Object> libros) throws SQLException {
+        String sql = "UPDATE libros SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            int i = 1;
+            for (int j=1; j<libros.size(); j++) {
+                stmt.setString(i++, (String) libros.get(j));
+            }
+            stmt.setString(i, (String) libros.get(0));
+            stmt.executeUpdate();
+        }
+    }
+
+    // DELETE
+    private void eliminarLibro(String ISBN) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE ISBN = ?";
+        try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
+            stmt.setString(1, ISBN);
+            stmt.executeUpdate();
+        }
+    }
 
     /* MÉTODOS PESTAÑA USUARIO */
 
@@ -633,10 +707,6 @@ public class ControladorPrincipal implements Initializable {
         panelDevoluciones.setVisible(false);
         panelUsuarios.setVisible(false);
     }
-    void cambiarVistaFormUsuarioL() {
-        panelLibros.setVisible(false);
-        panelRegistroLibros.setVisible(true);
-    }
 
     @FXML
     void verPrestamos() {
@@ -656,28 +726,6 @@ public class ControladorPrincipal implements Initializable {
         panelUsuarios.setVisible(true);
         panelRegistroUsuarios.setVisible(false);
     }
-
-    void cambiarVistaVolverUsuario() {
-        panelRegistroLibros.setVisible(false);
-        panelLibros.setVisible(true);
-
-    }
-    @FXML
-    void volverLibros() {
-        cambiarVistaVolverUsuario();
-        //* Vaciar campos formulario libros
-        tfISBN.setText("");
-        tfTitulo.setText("");
-        tfAutor.setText("");
-        cBoxCategoria.setValue(null);
-        tfIdioma.setText("");
-        tfPaginas.setText("");
-        tfEjemplares.setText("");
-        panelPrincipal.setVisible(true);
-    }
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
