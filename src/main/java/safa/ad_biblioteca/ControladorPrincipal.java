@@ -126,7 +126,7 @@ public class ControladorPrincipal implements Initializable {
     private Pane panelLibros;
 
     @FXML
-    private ComboBox<?> cBoxCategoria;
+    private TextField tfCategoria; // Lo he cambiado a textfield mientras para poder seguir
 
     @FXML
     private Pane panelPrestamos;
@@ -211,6 +211,7 @@ public class ControladorPrincipal implements Initializable {
     Conexion conexion = new Conexion();
     Boolean editaUsuario;
     Boolean editaLibro;
+
 
     // Métodos
 
@@ -337,14 +338,14 @@ public class ControladorPrincipal implements Initializable {
         tfISBN.setText("");
         tfTitulo.setText("");
         tfAutor.setText("");
-        cBoxCategoria.setValue(null);
+        tfCategoria.setText("");
         tfIdioma.setText("");
         tfPaginas.setText("");
         tfEjemplares.setText("");
         panelPrincipal.setVisible(true);
     }
 
-    String leerCampoLibro(String nombreCampoL, String texto, String criterioValidacion) {
+    String leerCampoLibro(String nombreCampo, String texto, String criterioValidacion) {
         if (texto.matches(criterioValidacion)) {
             return texto;
         } else {
@@ -356,7 +357,7 @@ public class ControladorPrincipal implements Initializable {
         libros.add(leerCampoLibro("ISBN",tfISBN.getText(),".{10,13}"));
         libros.add(leerCampoLibro("Titulo",tfTitulo.getText(),".{1,50}"));
         libros.add(leerCampoLibro("Autor",tfAutor.getText(),".{1,50}"));
-        libros.add(leerCampoLibro("Categoria", (String) cBoxCategoria.getValue(),"^\\s*$"));
+        libros.add(leerCampoLibro("Categoria", tfCategoria.getText(),"^\\s*$"));
         libros.add(leerCampoLibro("Idioma",tfIdioma.getText(),".{1,20}"));
         libros.add(leerCampoLibro("Paginas",tfPaginas.getText(),".{1,3}"));
         libros.add(leerCampoLibro("Ejemplares",tfEjemplares.getText(),".{1,3}"));
@@ -390,7 +391,7 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaCategoria(String Categoria, StringBuilder mensajeError) {
         if (Categoria == null) {    // if (!cBoxCategoria.getSelectedItem().toString().matches("^\\s*$")) {
 
-            mensajeError.append("Categoría (Seleccione una categoría)\n");
+            mensajeError.append("Categoría (Escriba una categoría)\n");
             return true;
         }
         return false;
@@ -442,9 +443,6 @@ public class ControladorPrincipal implements Initializable {
         }
         return hayError;
     }
-//    @FXML
-  //  void insertarLibro(ActionEvent event) {
-    //}
 
     // INSERT
     private void insertarLibro() throws SQLException {
