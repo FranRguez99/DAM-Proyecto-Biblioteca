@@ -318,22 +318,7 @@ public class ControladorPrincipal implements Initializable {
         editaLibro = false;
     }
 
-    void cambiarVistaFormUsuarioL() {
-        panelLibros.setVisible(false);
-        panelRegistroLibros.setVisible(true);
-    }
 
-    @FXML
-    void volverLibros(ActionEvent event) {
-        verLibros();
-        // Vaciar campos
-    }
-
-    void cambiarVistaVolverUsuario() {
-        panelRegistroLibros.setVisible(false);
-        panelLibros.setVisible(true);
-
-    }
     String leerCampoLibro(String nombreCampo, String texto, String criterioValidacion) {
         if (texto.matches(criterioValidacion)) {
             return texto;
@@ -648,6 +633,10 @@ public class ControladorPrincipal implements Initializable {
         panelDevoluciones.setVisible(false);
         panelUsuarios.setVisible(false);
     }
+    void cambiarVistaFormUsuarioL() {
+        panelLibros.setVisible(false);
+        panelRegistroLibros.setVisible(true);
+    }
 
     @FXML
     void verPrestamos() {
@@ -668,6 +657,11 @@ public class ControladorPrincipal implements Initializable {
         panelRegistroUsuarios.setVisible(false);
     }
 
+    void cambiarVistaVolverUsuario() {
+        panelRegistroLibros.setVisible(false);
+        panelLibros.setVisible(true);
+
+    }
     @FXML
     void volverLibros() {
         cambiarVistaVolverUsuario();
