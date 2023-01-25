@@ -1,8 +1,6 @@
 package safa.ad_biblioteca.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Conexion {
 
@@ -17,5 +15,6 @@ public class Conexion {
             throw new RuntimeException(e);
         }
     }
+
 
 }
