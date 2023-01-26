@@ -179,33 +179,6 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     private TextField tfEjemplares;
 
-    @FXML
-    private TableView<Libro> tablaLibros;
-
-    @FXML
-    private TableColumn<Libro, String> ISBNcol;
-
-
-    @FXML
-    private TableColumn<Libro, String> tituloCol;
-
-    @FXML
-    private TableColumn<Libro, String> autorCol;
-
-    @FXML
-    private TableColumn<Libro, String> categoriaCol;
-
-    @FXML
-    private TableColumn<Libro, String> idiomaCol;
-
-    @FXML
-    private TableColumn<Libro, String> paginalCol;
-
-    @FXML
-    private TableColumn<Libro, String> ejemplaresCol;
-
-    @FXML
-    private ObservableList<Libro> libros;
 
     // Atributos
     Conexion conexion = new Conexion();
@@ -215,84 +188,9 @@ public class ControladorPrincipal implements Initializable {
 
     // Métodos
 
-
-    // Clase Libro
-    public class Libro {  // No se si quitarle los private
-        private String ISBN;
-        private String titulo;
-        private String autor;
-        private String categoria;
-        private String idioma;
-        private String paginas;
-        private String ejemplares;
-
-        public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares) {
-            this.ISBN = ISBN;
-            this.titulo = titulo;
-            this.autor = autor;
-            this.categoria = categoria;
-            this.idioma = idioma;
-            this.paginas = paginas;
-            this.ejemplares = ejemplares;
-
-        }
-
-        public String getISBN() {
-            return ISBN;
-        }
-
-        public void setISBN(String ISBN) {
-            this.ISBN = ISBN;
-        }
-
-        public String getTitulo() {
-            return titulo;
-        }
-
-        public void setTitulo(String titulo) {
-            this.titulo = titulo;
-        }
-
-        public String getAutor() {
-            return autor;
-        }
-
-        public void setAutor(String autor) {
-            this.autor = autor;
-        }
-
-        public String getCategoria() {
-            return categoria;
-        }
-
-        public void setCategoria(String categoria) {
-            this.categoria = categoria;
-        }
-        public String getIdioma() {
-            return idioma;
-        }
-
-        public void setIdioma(String idioma) {
-            this.idioma = idioma;
-        }
-        public String getPaginas() {
-            return paginas;
-        }
-
-        public void setPaginas(String paginas) {
-            this.paginas = paginas;
-        }
-
-        public String getEjemplares() {
-            return ejemplares;
-        }
-
-        public void setEjemplares(String ejemplares) {
-            this.ejemplares = ejemplares;
-        }
-
-    }
     /* MÉTODOS PESTAÑA LIBROS */
+
+
     @FXML
     void aceptarLibros(ActionEvent event) throws SQLException {
         if (editaLibro){
@@ -307,8 +205,6 @@ public class ControladorPrincipal implements Initializable {
         eliminarLibro("77864953V");
         // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
-
-
 
     @FXML
     void modificarLibro() {
@@ -727,6 +623,8 @@ public class ControladorPrincipal implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
+
 
 }
