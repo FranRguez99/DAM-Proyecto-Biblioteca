@@ -17,4 +17,11 @@ public class Conexion {
     }
 
 
+    public Statement createStatement() {
+        try {
+            return conexion.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

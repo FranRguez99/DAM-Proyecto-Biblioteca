@@ -1,16 +1,20 @@
 package safa.ad_biblioteca;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import safa.ad_biblioteca.model.Conexion;
 
+
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -179,6 +183,125 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     private TextField tfEjemplares;
 
+    @FXML
+    private Pane panelLibrosPreview;
+
+    @FXML
+    private ImageView imageViewLib1;
+
+    @FXML
+    private ImageView imageViewLib2;
+
+    @FXML
+    private ImageView imageViewLib3;
+
+    @FXML
+    private ImageView imageViewLib4;
+
+    @FXML
+    private ImageView imageViewLib5;
+
+    @FXML
+    private HBox HBoxDatosLibroBuscado;
+
+    @FXML
+    private ImageView imgViewLibroBuscado;
+
+    @FXML
+    private ListView<String> ListViewDatosLibro;
+
+    @FXML
+    private TextField tfBuscarISBN;
+
+    // Clase Libro
+    public class Libro {
+        private String ISBN;
+        private String titulo;
+        private String autor;
+        private String categoria;
+        private String idioma;
+        private String paginas;
+        private String ejemplares;
+        private ImageView imagen;
+
+
+        public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares, ImageView imagen) {
+            this.ISBN = ISBN;
+            this.titulo = titulo;
+            this.autor = autor;
+            this.categoria = categoria;
+            this.idioma = idioma;
+            this.paginas = paginas;
+            this.ejemplares = ejemplares;
+            this.imagen = imagen;
+        }
+
+        public Libro(String titulo, String autor, String paginas) {
+            this.titulo = titulo;
+            this.autor = autor;
+            this.paginas = paginas;
+        }
+
+
+        public ImageView getimagen() { return imagen; }
+
+        public void setimagen(ImageView imagen) {  this.imagen = imagen;  }
+
+        public String getISBN() {
+            return ISBN;
+        }
+
+        public void setISBN(String ISBN) {
+            this.ISBN = ISBN;
+        }
+
+        public String getTitulo() {
+            return titulo;
+        }
+
+        public void setTitulo(String titulo) {
+            this.titulo = titulo;
+        }
+
+        public String getAutor() {
+            return autor;
+        }
+
+        public void setAutor(String autor) {
+            this.autor = autor;
+        }
+
+        public String getCategoria() {
+            return categoria;
+        }
+
+        public void setCategoria(String categoria) {
+            this.categoria = categoria;
+        }
+        public String getIdioma() {
+            return idioma;
+        }
+
+        public void setIdioma(String idioma) {
+            this.idioma = idioma;
+        }
+        public String getPaginas() {
+            return paginas;
+        }
+
+        public void setPaginas(String paginas) {
+            this.paginas = paginas;
+        }
+
+        public String getEjemplares() {
+            return ejemplares;
+        }
+
+        public void setEjemplares(String ejemplares) {
+            this.ejemplares = ejemplares;
+        }
+
+    }
 
     // Atributos
     Conexion conexion = new Conexion();
@@ -190,7 +313,7 @@ public class ControladorPrincipal implements Initializable {
 
     /* MÉTODOS PESTAÑA LIBROS */
 
-
+    // Boton aceptar
     @FXML
     void aceptarLibros(ActionEvent event) throws SQLException {
         if (editaLibro){
@@ -199,38 +322,42 @@ public class ControladorPrincipal implements Initializable {
             insertarLibro();
         } volverLibros();
     }
-
+    // Boton borrar
     @FXML
     void borrarLibro(ActionEvent event) throws SQLException {
         eliminarLibro("77864953V");
         // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
-
+    // Boton modificar
     @FXML
     void modificarLibro() {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
-
+    // Boton nuevo libro -> cambia de vista al formulario de registro
     @FXML
     void nuevoLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = false;
     }
-
+    // Para mostrar el formulario de registro libros
     void cambiarVistaFormUsuarioL() {
         panelLibros.setVisible(false);
+        panelLibrosPreview.setVisible(false);
         panelRegistroLibros.setVisible(true);
     }
-    void cambiarVistaVolverUsuario() {
+    // Para mostrar el panel principal de libros
+    void cambiarVistaVolverLibro() {
         panelRegistroLibros.setVisible(false);
         panelLibros.setVisible(true);
+        panelLibrosPreview.setVisible(true);
+        HBoxDatosLibroBuscado.setVisible(false);
     }
 
     @FXML
     void volverLibros() {
-        cambiarVistaVolverUsuario();
-        //* Vaciar campos formulario libros
+        cambiarVistaVolverLibro();
+        // Vaciar campos formulario libros
         tfISBN.setText("");
         tfTitulo.setText("");
         tfAutor.setText("");
@@ -240,8 +367,59 @@ public class ControladorPrincipal implements Initializable {
         tfEjemplares.setText("");
         panelPrincipal.setVisible(true);
     }
+    public class BookController {
 
-    String leerCampoLibro(String nombreCampo, String texto, String criterioValidacion) {
+        private TableView<Libro> ListViewDatosLibro;
+
+        public BookController(TableView<Libro> booksList) {
+            this.ListViewDatosLibro = ListViewDatosLibro;
+        }
+    // Mostrar el libro buscado / oculta la preview de libros general y muestra el libro concreto
+    void mostrarLibroBuscado() throws SQLException {
+        panelLibrosPreview.setVisible(false); // Desactivar el panel de libros de bienvenida
+        HBoxDatosLibroBuscado.setVisible(true); // Activar el de la vista de libro buscado
+
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
+
+            ListViewDatosLibro.getItems().clear();
+            while(rs.next()) {
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String paginas = rs.getString("paginas");
+
+                Libro book = new Libro(titulo, autor, paginas);
+                ListViewDatosLibro.getItems().add(book);
+            }
+            ListViewDatosLibro.refresh();
+            conexion.conexion.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+        public void initTableView() {
+            TableColumn<Libro, String> tituloCol = new TableColumn<>("Titulo");
+            tituloCol.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+            ListViewDatosLibro.getColumns().add(tituloCol);
+
+            TableColumn<Libro, ImageView> autorCol = new TableColumn<>("Autor");
+            autorCol.setCellValueFactory(new PropertyValueFactory<>("autor"));
+            ListViewDatosLibro.getColumns().add(autorCol);
+
+            TableColumn<Libro, Integer> paginasCol = new TableColumn<>("Paginas");
+            paginasCol.setCellValueFactory(new PropertyValueFactory<>("paginas"));
+            ListViewDatosLibro.getColumns().add(paginasCol);
+
+            ObservableList<Libro> books = FXCollections.observableArrayList();
+            ListViewDatosLibro.setItems(books);
+        }
+    }
+
+
+
+    String leerCampoLibro(String nombreCampoL, String texto, String criterioValidacion) {
         if (texto.matches(criterioValidacion)) {
             return texto;
         } else {
