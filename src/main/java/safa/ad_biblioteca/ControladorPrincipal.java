@@ -404,11 +404,11 @@ public class ControladorPrincipal implements Initializable {
             tituloCol.setCellValueFactory(new PropertyValueFactory<>("titulo"));
             ListViewDatosLibro.getColumns().add(tituloCol);
 
-            TableColumn<Libro, ImageView> autorCol = new TableColumn<>("Autor");
+            TableColumn<Libro, String> autorCol = new TableColumn<>("Autor");
             autorCol.setCellValueFactory(new PropertyValueFactory<>("autor"));
             ListViewDatosLibro.getColumns().add(autorCol);
 
-            TableColumn<Libro, Integer> paginasCol = new TableColumn<>("Paginas");
+            TableColumn<Libro, String> paginasCol = new TableColumn<>("Paginas");
             paginasCol.setCellValueFactory(new PropertyValueFactory<>("paginas"));
             ListViewDatosLibro.getColumns().add(paginasCol);
 
