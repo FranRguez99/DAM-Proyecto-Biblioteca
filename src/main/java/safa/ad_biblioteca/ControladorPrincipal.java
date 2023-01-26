@@ -213,6 +213,8 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     private TextField tfBuscarISBN;
 
+
+
     // Clase Libro
     public class Libro {
         private String ISBN;
@@ -353,7 +355,12 @@ public class ControladorPrincipal implements Initializable {
         panelLibrosPreview.setVisible(true);
         HBoxDatosLibroBuscado.setVisible(false);
     }
-
+    // oculta la preview de libros general y muestra el libro concreto
+    void cambiarVistaBusqueda(){
+        panelLibros.setVisible(true);
+        panelLibrosPreview.setVisible(false); // Desactivar el panel de libros de bienvenida
+        HBoxDatosLibroBuscado.setVisible(true); // Activar el de la vista de libro buscado
+    }
     @FXML
     void volverLibros() {
         cambiarVistaVolverLibro();
@@ -367,38 +374,71 @@ public class ControladorPrincipal implements Initializable {
         tfEjemplares.setText("");
         panelPrincipal.setVisible(true);
     }
+
     public class BookController {
 
         private TableView<Libro> ListViewDatosLibro;
+        private TextField tfBuscarISBN;
+        private Button btnLibrosBuscar;
+
+        // Mostrar el libro buscado
+        void mostrarLibroBuscado() throws SQLException {
+            cambiarVistaBusqueda();
+
+            try {
+                Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
+                Statement stmt = conexion.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
+
+                ListViewDatosLibro.getItems().clear();
+                while(rs.next()) {
+                    String titulo = rs.getString("titulo");
+                    String autor = rs.getString("autor");
+                    String paginas = rs.getString("paginas");
+
+                    Libro book = new Libro(titulo, autor, paginas);
+                    ListViewDatosLibro.getItems().add(book);
+                }
+                ListViewDatosLibro.refresh();
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        // TODO metodo mostrar la imagen
 
         public BookController(TableView<Libro> booksList) {
             this.ListViewDatosLibro = ListViewDatosLibro;
         }
-    // Mostrar el libro buscado / oculta la preview de libros general y muestra el libro concreto
-    void mostrarLibroBuscado() throws SQLException {
-        panelLibrosPreview.setVisible(false); // Desactivar el panel de libros de bienvenida
-        HBoxDatosLibroBuscado.setVisible(true); // Activar el de la vista de libro buscado
+        @FXML
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+            initTableView();
+            loadBooksFromDB();
+            btnLibrosBuscar.setOnAction(e -> searchBook());
+        }
+        public void loadBooksFromDB() {
+            try {
+                Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
+                Statement stmt = conexion.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
 
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
-            Statement stmt = conexion.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
+                ListViewDatosLibro.getItems().clear();
+                while(rs.next()) {
+                    String titulo = rs.getString("titulo");
+                    String autor = rs.getString("autor");
+                    String paginas = rs.getString("paginas");
 
-            ListViewDatosLibro.getItems().clear();
-            while(rs.next()) {
-                String titulo = rs.getString("titulo");
-                String autor = rs.getString("autor");
-                String paginas = rs.getString("paginas");
-
-                Libro book = new Libro(titulo, autor, paginas);
-                ListViewDatosLibro.getItems().add(book);
+                    Libro book = new Libro(titulo, autor, paginas);
+                    ListViewDatosLibro.getItems().add(book);
+                }
+                ListViewDatosLibro.refresh();
+                conexion.close();
+            } catch(SQLException e) {
+                e.printStackTrace();
             }
-            ListViewDatosLibro.refresh();
-            conexion.conexion.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        }
+
+        // Para mostrar los datos en la ListView
         public void initTableView() {
             TableColumn<Libro, String> tituloCol = new TableColumn<>("Titulo");
             tituloCol.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -414,6 +454,32 @@ public class ControladorPrincipal implements Initializable {
 
             ObservableList<Libro> books = FXCollections.observableArrayList();
             ListViewDatosLibro.setItems(books);
+        }
+    } // tfBuscarISBN   btnLibrosBuscar
+
+    @FXML
+    private void searchBook() {
+        String ISBN = tfBuscarISBN.getText();
+        try {
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
+            Statement stmt = conexion.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro WHERE ISBN LIKE '%" + ISBN + "%'");
+
+            ListViewDatosLibro.getItems().clear();
+            while(rs.next()) {
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String paginas = rs.getString("paginas");
+
+                Libro libro = new Libro(titulo, autor, paginas);
+                ListViewDatosLibro.getItems().add("Título: " + titulo); //?
+                ListViewDatosLibro.getItems().add(autor);
+                ListViewDatosLibro.getItems().add(paginas);
+            }
+            ListViewDatosLibro.refresh();
+            conexion.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
         }
     }
 
