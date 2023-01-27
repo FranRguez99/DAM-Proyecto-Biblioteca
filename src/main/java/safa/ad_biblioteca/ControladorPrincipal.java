@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import safa.ad_biblioteca.model.Conexion;
+import safa.ad_biblioteca.model.Usuario;
 
 
 import java.net.URL;
@@ -151,6 +152,9 @@ public class ControladorPrincipal implements Initializable {
     private TextField tfApellidos;
 
     @FXML
+    private TextField tfClave;
+
+    @FXML
     private TextField tfDNI;
 
     @FXML
@@ -214,7 +218,6 @@ public class ControladorPrincipal implements Initializable {
     private TextField tfBuscarISBN;
 
 
-
     // Clase Libro
     public class Libro {
         private String ISBN;
@@ -245,9 +248,13 @@ public class ControladorPrincipal implements Initializable {
         }
 
 
-        public ImageView getimagen() { return imagen; }
+        public ImageView getimagen() {
+            return imagen;
+        }
 
-        public void setimagen(ImageView imagen) {  this.imagen = imagen;  }
+        public void setimagen(ImageView imagen) {
+            this.imagen = imagen;
+        }
 
         public String getISBN() {
             return ISBN;
@@ -280,6 +287,7 @@ public class ControladorPrincipal implements Initializable {
         public void setCategoria(String categoria) {
             this.categoria = categoria;
         }
+
         public String getIdioma() {
             return idioma;
         }
@@ -287,6 +295,7 @@ public class ControladorPrincipal implements Initializable {
         public void setIdioma(String idioma) {
             this.idioma = idioma;
         }
+
         public String getPaginas() {
             return paginas;
         }
@@ -318,36 +327,42 @@ public class ControladorPrincipal implements Initializable {
     // Boton aceptar
     @FXML
     void aceptarLibros(ActionEvent event) throws SQLException {
-        if (editaLibro){
+        if (editaLibro) {
             actualizarLibro();
         } else {
             insertarLibro();
-        } volverLibros();
+        }
+        volverLibros();
     }
+
     // Boton borrar
     @FXML
     void borrarLibro(ActionEvent event) throws SQLException {
         eliminarLibro("77864953V");
         // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
+
     // Boton modificar
     @FXML
     void modificarLibro() {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
+
     // Boton nuevo libro -> cambia de vista al formulario de registro
     @FXML
     void nuevoLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = false;
     }
+
     // Para mostrar el formulario de registro libros
     void cambiarVistaFormUsuarioL() {
         panelLibros.setVisible(false);
         panelLibrosPreview.setVisible(false);
         panelRegistroLibros.setVisible(true);
     }
+
     // Para mostrar el panel principal de libros
     void cambiarVistaVolverLibro() {
         panelRegistroLibros.setVisible(false);
@@ -355,12 +370,14 @@ public class ControladorPrincipal implements Initializable {
         panelLibrosPreview.setVisible(true);
         HBoxDatosLibroBuscado.setVisible(false);
     }
+
     // oculta la preview de libros general y muestra el libro concreto
-    void cambiarVistaBusqueda(){
+    void cambiarVistaBusqueda() {
         panelLibros.setVisible(true);
         panelLibrosPreview.setVisible(false); // Desactivar el panel de libros de bienvenida
         HBoxDatosLibroBuscado.setVisible(true); // Activar el de la vista de libro buscado
     }
+
     @FXML
     void volverLibros() {
         cambiarVistaVolverLibro();
@@ -391,7 +408,7 @@ public class ControladorPrincipal implements Initializable {
                 ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
 
                 ListViewDatosLibro.getItems().clear();
-                while(rs.next()) {
+                while (rs.next()) {
                     String titulo = rs.getString("titulo");
                     String autor = rs.getString("autor");
                     String paginas = rs.getString("paginas");
@@ -410,12 +427,14 @@ public class ControladorPrincipal implements Initializable {
         public BookController(TableView<Libro> booksList) {
             this.ListViewDatosLibro = ListViewDatosLibro;
         }
+
         @FXML
         public void initialize(URL url, ResourceBundle resourceBundle) {
             initTableView();
             loadBooksFromDB();
             btnLibrosBuscar.setOnAction(e -> searchBook());
         }
+
         public void loadBooksFromDB() {
             try {
                 Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
@@ -423,7 +442,7 @@ public class ControladorPrincipal implements Initializable {
                 ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
 
                 ListViewDatosLibro.getItems().clear();
-                while(rs.next()) {
+                while (rs.next()) {
                     String titulo = rs.getString("titulo");
                     String autor = rs.getString("autor");
                     String paginas = rs.getString("paginas");
@@ -433,7 +452,7 @@ public class ControladorPrincipal implements Initializable {
                 }
                 ListViewDatosLibro.refresh();
                 conexion.close();
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -466,7 +485,7 @@ public class ControladorPrincipal implements Initializable {
             ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro WHERE ISBN LIKE '%" + ISBN + "%'");
 
             ListViewDatosLibro.getItems().clear();
-            while(rs.next()) {
+            while (rs.next()) {
                 String titulo = rs.getString("titulo");
                 String autor = rs.getString("autor");
                 String paginas = rs.getString("paginas");
@@ -478,11 +497,10 @@ public class ControladorPrincipal implements Initializable {
             }
             ListViewDatosLibro.refresh();
             conexion.close();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 
 
     String leerCampoLibro(String nombreCampoL, String texto, String criterioValidacion) {
@@ -492,15 +510,16 @@ public class ControladorPrincipal implements Initializable {
             return null;
         }
     }
+
     ArrayList<Object> leeValoresLibro() {
         ArrayList<Object> libros = new ArrayList<Object>();
-        libros.add(leerCampoLibro("ISBN",tfISBN.getText(),".{10,13}"));
-        libros.add(leerCampoLibro("Titulo",tfTitulo.getText(),".{1,50}"));
-        libros.add(leerCampoLibro("Autor",tfAutor.getText(),".{1,50}"));
-        libros.add(leerCampoLibro("Categoria", tfCategoria.getText(),"^\\s*$"));
-        libros.add(leerCampoLibro("Idioma",tfIdioma.getText(),".{1,20}"));
-        libros.add(leerCampoLibro("Paginas",tfPaginas.getText(),".{1,3}"));
-        libros.add(leerCampoLibro("Ejemplares",tfEjemplares.getText(),".{1,3}"));
+        libros.add(leerCampoLibro("ISBN", tfISBN.getText(), ".{10,13}"));
+        libros.add(leerCampoLibro("Titulo", tfTitulo.getText(), ".{1,50}"));
+        libros.add(leerCampoLibro("Autor", tfAutor.getText(), ".{1,50}"));
+        libros.add(leerCampoLibro("Categoria", tfCategoria.getText(), "^\\s*$"));
+        libros.add(leerCampoLibro("Idioma", tfIdioma.getText(), ".{1,20}"));
+        libros.add(leerCampoLibro("Paginas", tfPaginas.getText(), ".{1,3}"));
+        libros.add(leerCampoLibro("Ejemplares", tfEjemplares.getText(), ".{1,3}"));
 
         return libros;
     }
@@ -520,6 +539,7 @@ public class ControladorPrincipal implements Initializable {
         }
         return false;
     }
+
     private boolean compruebaAutor(String Autor, StringBuilder mensajeError) {
         if (Autor == null) {
             mensajeError.append("Autor (No puede estar vacío. Máximo 50 caracteres)\n");
@@ -546,22 +566,22 @@ public class ControladorPrincipal implements Initializable {
     }
 
     private boolean compruebaPaginas(String Paginas, StringBuilder mensajeError) {
-        if(Paginas == null) {
+        if (Paginas == null) {
             mensajeError.append("Páginas (No puede estar vacío.)\n");
             return true;
         }
         return false;
     }
 
-    private boolean compruebaEjemplares (String Ejemplares, StringBuilder mensajeError) {
-        if(Ejemplares == null) {
+    private boolean compruebaEjemplares(String Ejemplares, StringBuilder mensajeError) {
+        if (Ejemplares == null) {
             mensajeError.append("Ejemplares (No puede estar vacío.)\n");
             return true;
         }
         return false;
     }
 
-    boolean mensajeErrorLibro(ArrayList<Object>libros ) {
+    boolean mensajeErrorLibro(ArrayList<Object> libros) {
         boolean hayError = false;
         StringBuilder mensajeError = new StringBuilder();
 
@@ -574,7 +594,7 @@ public class ControladorPrincipal implements Initializable {
         hayError = compruebaEjemplares((String) libros.get(6), mensajeError) ? true : hayError;
 
 
-        if (hayError){
+        if (hayError) {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Error");
             error.setHeaderText("CAMPOS ERRÓNEOS");
@@ -607,7 +627,7 @@ public class ControladorPrincipal implements Initializable {
     // UPDATE
     private void actualizarLibro() throws SQLException {
         ArrayList<Object> libros = leeValoresLibro();
-        if (!mensajeErrorUsuario(libros)) {
+        if (!mensajeErrorLibro(libros)) {
             consultaActualizarLibro(libros);
         }
     }
@@ -616,7 +636,7 @@ public class ControladorPrincipal implements Initializable {
         String sql = "UPDATE libros SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            for (int j=1; j<libros.size(); j++) {
+            for (int j = 1; j < libros.size(); j++) {
                 stmt.setString(i++, (String) libros.get(j));
             }
             stmt.setString(i, (String) libros.get(0));
@@ -637,7 +657,7 @@ public class ControladorPrincipal implements Initializable {
 
     @FXML
     void aceptarUsuarios(ActionEvent event) throws SQLException {
-        if (editaUsuario){
+        if (editaUsuario) {
             actualizarUsuario();
         } else {
             insertarUsuario();
@@ -687,21 +707,24 @@ public class ControladorPrincipal implements Initializable {
         }
     }
 
-    ArrayList<Object> leerValoresUsuario() {
-        ArrayList<Object> valores = new ArrayList<Object>();
-        valores.add(leerCampo("DNI", tfDNI.getText(), "[0-9]{8}[A-Za-z]")); // Criterio: Que tenga formato de DNI
-        valores.add(leerCampo("Nombre", tfNombre.getText(), ".{1,20}"));
-        valores.add(leerCampo("Apellidos", tfApellidos.getText(), ".{1,40}"));
-        valores.add(leerCampo("Domicilio", tfDomicilio.getText(), ".{1,40}"));
-        valores.add(leerCampo("Telefono", tfTelefono.getText(), "^[0-9]{9}$")); // Criterio: que sean 9 cifras
-        valores.add(leerCampo("Email", tfEmail.getText(), "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")); // Criterio: Que tenga formato de email
-        return valores;
+    Usuario leerValoresUsuario() {
+        String DNI = leerCampo("DNI", tfDNI.getText(), "[0-9]{8}[A-Za-z]"); // Criterio: Que tenga formato de DNI
+        String nombre = leerCampo("Nombre", tfNombre.getText(), ".{1,20}");
+        String apellidos = leerCampo("Apellidos", tfApellidos.getText(), ".{1,40}");
+        String domicilio = leerCampo("Domicilio", tfDomicilio.getText(), ".{1,40}");
+        String telefono = leerCampo("Telefono", tfTelefono.getText(), "^[0-9]{9}$"); // Criterio: que sean 9 cifras
+        String email = leerCampo("Email", tfEmail.getText(), "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"); // Criterio: Que tenga formato de email
+        String clave = leerCampo("Clave", tfClave.getText(), "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$"); // Criterio: 1 mayus, 1 minus, 8 caracteres
+        return new Usuario(DNI, nombre, apellidos, domicilio, telefono, email, clave);
     }
 
     private boolean compruebaDNI(String dni, StringBuilder mensajeError) {
         if (dni == null) {
             mensajeError.append("DNI (Introduzca un DNI válido)\n");
+            tfDNI.setId("tfError");
             return true;
+        } else {
+            tfDNI.setId("tfNormal");
         }
         return false;
     }
@@ -709,7 +732,10 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaNombre(String nombre, StringBuilder mensajeError) {
         if (nombre == null) {
             mensajeError.append("Nombre (No puede estar vacío. Máximo 20 caracteres)\n");
+            tfNombre.setId("tfError");
             return true;
+        } else {
+            tfNombre.setId("tfNormal");
         }
         return false;
     }
@@ -717,7 +743,10 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaApellidos(String apellidos, StringBuilder mensajeError) {
         if (apellidos == null) {
             mensajeError.append("Apellidos (No puede estar vacío. Máximo 40 caracteres)\n");
+            tfApellidos.setId("tfError");
             return true;
+        } else {
+            tfApellidos.setId("tfNormal");
         }
         return false;
     }
@@ -725,7 +754,10 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaDomicilio(String domicilio, StringBuilder mensajeError) {
         if (domicilio == null) {
             mensajeError.append("Domicilio (No puede estar vacío. Máximo 40 caracteres)\n");
+            tfDomicilio.setId("tfError");
             return true;
+        } else {
+            tfDomicilio.setId("tfNormal");
         }
         return false;
     }
@@ -733,7 +765,10 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaTelefono(String telefono, StringBuilder mensajeError) {
         if (telefono == null) {
             mensajeError.append("Teléfono (9 dígitos)\n");
+            tfTelefono.setId("tfError");
             return true;
+        } else {
+            tfTelefono.setId("tfNormal");
         }
         return false;
     }
@@ -741,27 +776,42 @@ public class ControladorPrincipal implements Initializable {
     private boolean compruebaEmail(String email, StringBuilder mensajeError) {
         if (email == null) {
             mensajeError.append("Email (Debe tener un formato válido)\n");
+            tfEmail.setId("tfError");
             return true;
+        } else {
+            tfEmail.setId("tfNormal");
         }
         return false;
     }
 
-    boolean mensajeErrorUsuario(ArrayList<Object> valores) {
+    private boolean compruebaClave(String email, StringBuilder mensajeError) {
+        if (email == null) {
+            mensajeError.append("Clave (Debe tener al menos 8 caracteres, 1 mayúscula y 1 minúscula)\n");
+            tfClave.setId("tfError");
+            return true;
+        } else {
+            tfClave.setId("tfNormal");
+        }
+        return false;
+    }
+
+    boolean mensajeErrorUsuario(Usuario usuario) {
         boolean hayError = false;
         StringBuilder mensajeError = new StringBuilder();
 
-        hayError = compruebaDNI((String) valores.get(0), mensajeError) ? true : hayError;
-        hayError = compruebaNombre((String) valores.get(1), mensajeError) ? true : hayError;
-        hayError = compruebaApellidos((String) valores.get(2), mensajeError) ? true : hayError;
-        hayError = compruebaDomicilio((String) valores.get(3), mensajeError) ? true : hayError;
-        hayError = compruebaTelefono((String) valores.get(4), mensajeError) ? true : hayError;
-        hayError = compruebaEmail((String) valores.get(5), mensajeError) ? true : hayError;
+        hayError = compruebaDNI(usuario.getDNI(), mensajeError) ? true : hayError;
+        hayError = compruebaNombre(usuario.getNombre(), mensajeError) ? true : hayError;
+        hayError = compruebaApellidos(usuario.getApellidos(), mensajeError) ? true : hayError;
+        hayError = compruebaDomicilio(usuario.getDomicilio(), mensajeError) ? true : hayError;
+        hayError = compruebaTelefono(usuario.getTelefono(), mensajeError) ? true : hayError;
+        hayError = compruebaEmail(usuario.getEmail(), mensajeError) ? true : hayError;
+        hayError = compruebaClave(usuario.getClave(), mensajeError) ? true : hayError;
 
         if (hayError) {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Error");
             error.setHeaderText("CAMPOS ERRÓNEOS");
-            error.setContentText("Hay error en los siguientes campos: " + mensajeError.toString());
+            error.setContentText("Hay error en los siguientes campos:\n" + mensajeError.toString());
             error.showAndWait();
         }
         return hayError;
@@ -769,41 +819,55 @@ public class ControladorPrincipal implements Initializable {
 
     // INSERT
     void insertarUsuario() throws SQLException {
-        ArrayList<Object> valores = leerValoresUsuario();
-        if (!mensajeErrorUsuario(valores)) {
-            consultaInsertarUsuario(valores);
+        Usuario usuario = leerValoresUsuario();
+        if (!mensajeErrorUsuario(usuario)) {
+            consultaInsertarUsuario(usuario);
         }
     }
 
-    void consultaInsertarUsuario(ArrayList<Object> valores) throws SQLException {
-        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email) " +
-                "VALUES (?, ?, ?, ?, ?, ?)"; // Consulta para insertar usuarios en la base de datos
+    void consultaInsertarUsuario(Usuario usuario) throws SQLException {
+        String sql = "INSERT INTO usuarios (DNI, nombre, apellidos, domicilio, telefono, email, clave) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar usuarios en la base de datos
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            for (Object valor : valores) {
-                stmt.setString(i++, (String) valor);
-            }
-            stmt.executeUpdate(); // Ejecutar la consulta
+
+            stmt.setString(1, usuario.getDNI());
+            stmt.setString(2, usuario.getNombre());
+            stmt.setString(3, usuario.getApellidos());
+            stmt.setString(4, usuario.getDomicilio());
+            stmt.setString(5, usuario.getTelefono());
+            stmt.setString(6, usuario.getEmail());
+            stmt.setString(7, usuario.getClave());
+
+
+            stmt.executeUpdate();// Ejecutar la consulta
+            ventanaDialogo("INSERTAR USUARIO", "Usuario insertado con éxito");
         }
     }
 
     // UPDATE
     void actualizarUsuario() throws SQLException {
-        ArrayList<Object> valores = leerValoresUsuario();
-        if (!mensajeErrorUsuario(valores)) {
-            consultaActualizarUsuario(valores);
+        Usuario usuario = leerValoresUsuario();
+        if (!mensajeErrorUsuario(usuario)) {
+            consultaActualizarUsuario(usuario);
         }
     }
 
-    void consultaActualizarUsuario(ArrayList<Object> valores) throws SQLException {
-        String sql = "UPDATE usuarios SET nombre=?, apellidos=?, domicilio=?, telefono=?, email=? WHERE DNI=?";
+    void consultaActualizarUsuario(Usuario usuario) throws SQLException {
+        String sql = "UPDATE usuarios SET nombre=?, apellidos=?, domicilio=?, telefono=?, email=?, clave=? WHERE DNI=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            for (int j=1; j<valores.size(); j++) {
-                stmt.setString(i++, (String) valores.get(j));
-            }
-            stmt.setString(i, (String) valores.get(0));
-            stmt.executeUpdate();
+
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getApellidos());
+            stmt.setString(3, usuario.getDomicilio());
+            stmt.setString(4, usuario.getTelefono());
+            stmt.setString(5, usuario.getEmail());
+            stmt.setString(6, usuario.getClave());
+            stmt.setString(7, usuario.getDNI());
+
+            stmt.executeUpdate();// Ejecutar la consulta
+            ventanaDialogo("ACTUALIZAR USUARIO", "Usuario actualizado con éxito");
         }
     }
 
@@ -816,7 +880,16 @@ public class ControladorPrincipal implements Initializable {
         }
     }
 
-
+    /* MÉTODOS COMUNES */
+    private static void ventanaDialogo(String titulo, String mensaje) {
+        // Ventana de error
+        Dialog<String> ventana = new Dialog<>();
+        ventana.setTitle(titulo);
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        ventana.setContentText(mensaje);
+        ventana.getDialogPane().getButtonTypes().add(type);
+        ventana.showAndWait();
+    }
 
     /* BOTONES DE NAVEGACIÓN */
     @FXML
