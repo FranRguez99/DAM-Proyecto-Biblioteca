@@ -1,37 +1,48 @@
-#panel{
-    -fx-background-color : #b7ffe4;
+#panel {
+    -fx-background-color: #b7ffe4;
 }
 
-#btnMenu{
-    -fx-background-color :  #4ab57f;
+#btnMenu {
+    -fx-background-color: #4ab57f;
 }
 
 #btnMenu:hover {
     -fx-effect: innershadow(gaussian, #ffffff, 8, 0.5, 0, 0);
 }
-#menuLateral{
-    -fx-background-color :  #008452;
+
+#menuLateral {
+    -fx-background-color: #008452;
 }
 
-#barraSuperior{
-    -fx-background-color :  #008452;
+#barraSuperior {
+    -fx-background-color: #008452;
 }
+
+#tfNormal {
+    -fx-effect:  innershadow(three-pass-box, gray, 5 , 0.5, 1, 1);
+}
+
+#tfError {
+    -fx-effect:  innershadow(three-pass-box, darkred, 5 , 0.5, 1, 1);
+}
+
 #txtSeccion {
     -fx-font-family: "Arial Black";
 }
 
-#letreros{
+#letreros {
     -fx-text-fill: #008452;
 }
 
 #HBoxDatosLibroBuscado {
-    -fx-background-color :  #008452;
+    -fx-background-color: #008452;
 }
 
 #panelLibrosPreview {
-    -fx-background-color :  #008452;
+    -fx-background-color: #008452;
 }
-#ListViewDatosLibro{
-    -fx-background-color :  #4ab57f;
+
+#ListViewDatosLibro {
+    -fx-background-color: #4ab57f;
 
 }

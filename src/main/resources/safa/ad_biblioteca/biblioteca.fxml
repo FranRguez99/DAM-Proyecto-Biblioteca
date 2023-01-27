@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
    <children>
       <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
          <children>
@@ -148,7 +148,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
          <children>
             <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
                <children>
@@ -428,42 +428,48 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="DNI">
+            <Label id="letreros" layoutX="50.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="DNI">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Apellidos">
+            <Label id="letreros" layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Apellidos">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Nombre">
+            <Label id="letreros" layoutX="50.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Nombre">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Domicilio">
+            <Label id="letreros" layoutX="50.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Domicilio">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Teléfono">
+            <Label id="letreros" layoutX="460.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Teléfono">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Email">
+            <Label id="letreros" layoutX="460.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Email">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfDNI" layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
-            <TextField fx:id="tfNombre" layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
-            <TextField fx:id="tfApellidos" layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
-            <TextField fx:id="tfDomicilio" layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
-            <TextField fx:id="tfTelefono" layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
-            <TextField fx:id="tfEmail" layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
+            <Label id="letreros" layoutX="460.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Clave">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField id="tfNormal" fx:id="tfDNI" layoutX="50.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfNombre" layoutX="50.0" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfApellidos" layoutX="50.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfDomicilio" layoutX="50.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfTelefono" layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfEmail" layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfClave" layoutX="460.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" stylesheets="@style.css" />
             <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" onAction="#aceptarUsuarios" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
