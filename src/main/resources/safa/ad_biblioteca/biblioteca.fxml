@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
    <children>
       <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
          <children>
@@ -154,7 +148,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
+      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
          <children>
             <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
                <children>
@@ -166,8 +160,7 @@
                </children>
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-            <TextField layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
-            <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+            <TextField fx:id="tfBuscarISBN" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el ISBN del Libro a buscar" />
             <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -235,7 +228,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="btnMenu" fx:id="btnLibrosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnLibrosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchBook" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -272,11 +265,34 @@
                   <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
             </ImageView>
+            <Pane fx:id="panelLibrosPreview" layoutX="241.0" layoutY="205.0" prefHeight="137.0" prefWidth="566.0" stylesheets="@style.css" visible="false">
+               <children>
+                  <ImageView fx:id="imageViewLib1" fitHeight="118.0" fitWidth="96.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewLib2" fitHeight="118.0" fitWidth="96.0" layoutX="110.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewLib3" fitHeight="118.0" fitWidth="96.0" layoutX="214.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewLib4" fitHeight="118.0" fitWidth="96.0" layoutX="331.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+                  <ImageView fx:id="imageViewLib5" fitHeight="118.0" fitWidth="96.0" layoutX="456.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <HBox fx:id="HBoxDatosLibroBuscado" layoutX="318.0" layoutY="197.0" prefHeight="153.0" prefWidth="409.0">
+               <children>
+                  <ImageView fx:id="imgViewLibroBuscado" fitHeight="153.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" top="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ListView fx:id="ListViewDatosLibro" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
+                     <HBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </HBox.margin>
+                  </ListView>
+               </children>
+            </HBox>
          </children>
       </Pane>
       <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
          <children>
-            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css" visible="false">
+            <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
                <children>
                   <Label id="iLib" layoutX="350.0" stylesheets="@style.css" text="iLib - Usuarios" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -529,7 +545,7 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cBoxCategoria" layoutX="51.0" layoutY="325.0" prefHeight="31.0" prefWidth="240.0" promptText="Seleccione una categoría" />
+            <TextField fx:id="tfCategoria" layoutX="50.0" layoutY="328.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese la categoria del libro" />
          </children>
       </Pane>
       <Pane id="principal" fx:id="panelPrestamos" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">

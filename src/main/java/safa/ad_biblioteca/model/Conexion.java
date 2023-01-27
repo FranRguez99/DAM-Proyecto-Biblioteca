@@ -1,8 +1,6 @@
 package safa.ad_biblioteca.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Conexion {
 
@@ -11,11 +9,19 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca", "root",
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root",
                     "root");
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
+
+    public Statement createStatement() {
+        try {
+            return conexion.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

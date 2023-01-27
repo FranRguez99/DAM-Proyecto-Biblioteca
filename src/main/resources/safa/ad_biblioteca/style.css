@@ -23,3 +23,15 @@
 #letreros{
     -fx-text-fill: #008452;
 }
+
+#HBoxDatosLibroBuscado {
+    -fx-background-color :  #008452;
+}
+
+#panelLibrosPreview {
+    -fx-background-color :  #008452;
+}
+#ListViewDatosLibro{
+    -fx-background-color :  #4ab57f;
+
+}
