@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
@@ -290,7 +291,7 @@
             </HBox>
          </children>
       </Pane>
-      <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
+      <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css">
          <children>
             <Pane id="paneIzdoPpal" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" style="-fx-background-color: #008452;" stylesheets="@style.css">
                <children>
@@ -302,8 +303,16 @@
                </children>
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-            <TextField editable="false" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el DNI del usuario a buscar" />
-            <TableView layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0" />
+            <TextField id="tfNormal" fx:id="tfBuscarUsuarios" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" stylesheets="@style.css" />
+            <TableView fx:id="tvUsuarios" layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0">
+               <columns>
+                  <TableColumn fx:id="colDNI" prefWidth="75.0" text="DNI" />
+                  <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                  <TableColumn fx:id="colApellidos" prefWidth="94.4000244140625" text="Apellidos" />
+                  <TableColumn fx:id="colDomicilio" prefWidth="81.60000610351562" text="Domicilio" />
+                  <TableColumn fx:id="colTelefono" prefWidth="107.199951171875" text="Telefono" />
+                  <TableColumn fx:id="colEmail" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="130.0" text="Email" />
+               </columns></TableView>
             <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="111.0" stylesheets="@style.css" text="Usuarios">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -371,7 +380,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="btnMenu" fx:id="btnUsuariosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnUsuariosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#cargarTablaUsuarios" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
