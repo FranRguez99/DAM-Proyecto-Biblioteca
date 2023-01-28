@@ -3,6 +3,7 @@ package safa.ad_biblioteca;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import safa.ad_biblioteca.model.Conexion;
 import safa.ad_biblioteca.model.Usuario;
+import safa.ad_biblioteca.model.Libro;
 
 
 import java.net.URL;
@@ -215,104 +217,9 @@ public class ControladorPrincipal implements Initializable {
     private ListView<String> ListViewDatosLibro;
 
     @FXML
-    private TextField tfBuscarISBN;
+    private TextField tfBuscarLibro;
 
 
-    // Clase Libro
-    public class Libro {
-        private String ISBN;
-        private String titulo;
-        private String autor;
-        private String categoria;
-        private String idioma;
-        private String paginas;
-        private String ejemplares;
-        private ImageView imagen;
-
-
-        public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares, ImageView imagen) {
-            this.ISBN = ISBN;
-            this.titulo = titulo;
-            this.autor = autor;
-            this.categoria = categoria;
-            this.idioma = idioma;
-            this.paginas = paginas;
-            this.ejemplares = ejemplares;
-            this.imagen = imagen;
-        }
-
-        public Libro(String titulo, String autor, String paginas) {
-            this.titulo = titulo;
-            this.autor = autor;
-            this.paginas = paginas;
-        }
-
-
-        public ImageView getimagen() {
-            return imagen;
-        }
-
-        public void setimagen(ImageView imagen) {
-            this.imagen = imagen;
-        }
-
-        public String getISBN() {
-            return ISBN;
-        }
-
-        public void setISBN(String ISBN) {
-            this.ISBN = ISBN;
-        }
-
-        public String getTitulo() {
-            return titulo;
-        }
-
-        public void setTitulo(String titulo) {
-            this.titulo = titulo;
-        }
-
-        public String getAutor() {
-            return autor;
-        }
-
-        public void setAutor(String autor) {
-            this.autor = autor;
-        }
-
-        public String getCategoria() {
-            return categoria;
-        }
-
-        public void setCategoria(String categoria) {
-            this.categoria = categoria;
-        }
-
-        public String getIdioma() {
-            return idioma;
-        }
-
-        public void setIdioma(String idioma) {
-            this.idioma = idioma;
-        }
-
-        public String getPaginas() {
-            return paginas;
-        }
-
-        public void setPaginas(String paginas) {
-            this.paginas = paginas;
-        }
-
-        public String getEjemplares() {
-            return ejemplares;
-        }
-
-        public void setEjemplares(String ejemplares) {
-            this.ejemplares = ejemplares;
-        }
-
-    }
 
     // Atributos
     Conexion conexion = new Conexion();
@@ -331,38 +238,32 @@ public class ControladorPrincipal implements Initializable {
             actualizarLibro();
         } else {
             insertarLibro();
-        }
-        volverLibros();
+        } volverLibros();
     }
-
     // Boton borrar
     @FXML
     void borrarLibro(ActionEvent event) throws SQLException {
         eliminarLibro("77864953V");
         // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
-
     // Boton modificar
     @FXML
     void modificarLibro() {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
-
     // Boton nuevo libro -> cambia de vista al formulario de registro
     @FXML
     void nuevoLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = false;
     }
-
     // Para mostrar el formulario de registro libros
     void cambiarVistaFormUsuarioL() {
         panelLibros.setVisible(false);
         panelLibrosPreview.setVisible(false);
         panelRegistroLibros.setVisible(true);
     }
-
     // Para mostrar el panel principal de libros
     void cambiarVistaVolverLibro() {
         panelRegistroLibros.setVisible(false);
@@ -370,14 +271,12 @@ public class ControladorPrincipal implements Initializable {
         panelLibrosPreview.setVisible(true);
         HBoxDatosLibroBuscado.setVisible(false);
     }
-
     // oculta la preview de libros general y muestra el libro concreto
     void cambiarVistaBusqueda() {
         panelLibros.setVisible(true);
         panelLibrosPreview.setVisible(false); // Desactivar el panel de libros de bienvenida
         HBoxDatosLibroBuscado.setVisible(true); // Activar el de la vista de libro buscado
     }
-
     @FXML
     void volverLibros() {
         cambiarVistaVolverLibro();
@@ -411,10 +310,11 @@ public class ControladorPrincipal implements Initializable {
                 while (rs.next()) {
                     String titulo = rs.getString("titulo");
                     String autor = rs.getString("autor");
-                    String paginas = rs.getString("paginas");
+                    String ISBN = rs.getString("ISBN");
 
-                    Libro book = new Libro(titulo, autor, paginas);
-                    ListViewDatosLibro.getItems().add(book);
+
+                    Libro libro = new Libro(titulo, autor, ISBN);
+                    ListViewDatosLibro.getItems().add(libro);
                 }
                 ListViewDatosLibro.refresh();
                 conexion.close();
@@ -432,8 +332,21 @@ public class ControladorPrincipal implements Initializable {
         public void initialize(URL url, ResourceBundle resourceBundle) {
             initTableView();
             loadBooksFromDB();
-            btnLibrosBuscar.setOnAction(e -> searchBook());
+            btnLibrosBuscar.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    searchBook();
+                }
+            });
         }
+
+        /*
+        btnLibrosBuscar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                searchBook();
+            }
+        });      */
 
         public void loadBooksFromDB() {
             try {
@@ -478,22 +391,20 @@ public class ControladorPrincipal implements Initializable {
 
     @FXML
     private void searchBook() {
-        String ISBN = tfBuscarISBN.getText();
+        ListViewDatosLibro.getItems().clear();
+        String tituloBuscado = tfBuscarLibro.getText();
+
         try {
             Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
             Statement stmt = conexion.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro WHERE ISBN LIKE '%" + ISBN + "%'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM libro WHERE titulo LIKE '%" + tituloBuscado + "%' OR autor LIKE '%" + tituloBuscado + "%' OR categoria LIKE '%" + tituloBuscado + "%'");
 
             ListViewDatosLibro.getItems().clear();
             while (rs.next()) {
                 String titulo = rs.getString("titulo");
-                String autor = rs.getString("autor");
-                String paginas = rs.getString("paginas");
+                Libro libro = new Libro(titulo);
+                ListViewDatosLibro.getItems().add(titulo);
 
-                Libro libro = new Libro(titulo, autor, paginas);
-                ListViewDatosLibro.getItems().add("Título: " + titulo); //?
-                ListViewDatosLibro.getItems().add(autor);
-                ListViewDatosLibro.getItems().add(paginas);
             }
             ListViewDatosLibro.refresh();
             conexion.close();
@@ -501,6 +412,7 @@ public class ControladorPrincipal implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 
     String leerCampoLibro(String nombreCampoL, String texto, String criterioValidacion) {
@@ -511,17 +423,17 @@ public class ControladorPrincipal implements Initializable {
         }
     }
 
-    ArrayList<Object> leeValoresLibro() {
-        ArrayList<Object> libros = new ArrayList<Object>();
-        libros.add(leerCampoLibro("ISBN", tfISBN.getText(), ".{10,13}"));
-        libros.add(leerCampoLibro("Titulo", tfTitulo.getText(), ".{1,50}"));
-        libros.add(leerCampoLibro("Autor", tfAutor.getText(), ".{1,50}"));
-        libros.add(leerCampoLibro("Categoria", tfCategoria.getText(), "^\\s*$"));
-        libros.add(leerCampoLibro("Idioma", tfIdioma.getText(), ".{1,20}"));
-        libros.add(leerCampoLibro("Paginas", tfPaginas.getText(), ".{1,3}"));
-        libros.add(leerCampoLibro("Ejemplares", tfEjemplares.getText(), ".{1,3}"));
+    Libro leeValoresLibro() {
+        String ISBN = leerCampoLibro("ISBN", tfISBN.getText(), ".{10,13}");
+        String titulo = leerCampoLibro("Titulo", tfTitulo.getText(), ".{1,50}");
+        String autor = leerCampoLibro("Autor", tfAutor.getText(), ".{1,50}");
+        String categoria = leerCampoLibro("Categoria", tfCategoria.getText(), "^\\s*$");
+        String idioma = leerCampoLibro("Idioma", tfIdioma.getText(), ".{1,20}");
+        String paginas = leerCampoLibro("Paginas", tfPaginas.getText(), ".{1,3}");
+        String ejemplares = leerCampoLibro("Ejemplares", tfEjemplares.getText(), ".{1,3}");
+       // String imagen = leerCampoLibro("imagen", String.valueOf(imgViewLibroBuscado.getImage()), null);
+        return new Libro(ISBN, titulo, autor, categoria, idioma, paginas, ejemplares, null);
 
-        return libros;
     }
 
     private boolean compruebaISBN(String ISBN, StringBuilder mensajeError) {
@@ -581,17 +493,17 @@ public class ControladorPrincipal implements Initializable {
         return false;
     }
 
-    boolean mensajeErrorLibro(ArrayList<Object> libros) {
+    boolean mensajeErrorLibro(Libro libros) {
         boolean hayError = false;
         StringBuilder mensajeError = new StringBuilder();
 
-        hayError = compruebaISBN((String) libros.get(0), mensajeError) ? true : hayError;
-        hayError = compruebaTitulo((String) libros.get(1), mensajeError) ? true : hayError;
-        hayError = compruebaAutor((String) libros.get(2), mensajeError) ? true : hayError;
-        hayError = compruebaCategoria((String) libros.get(3), mensajeError) ? true : hayError;
-        hayError = compruebaIdioma((String) libros.get(4), mensajeError) ? true : hayError;
-        hayError = compruebaPaginas((String) libros.get(5), mensajeError) ? true : hayError;
-        hayError = compruebaEjemplares((String) libros.get(6), mensajeError) ? true : hayError;
+        hayError = compruebaISBN(libros.getISBN(), mensajeError) ? true : hayError;
+        hayError = compruebaTitulo(libros.getTitulo(), mensajeError) ? true : hayError;
+        hayError = compruebaAutor(libros.getAutor(), mensajeError) ? true : hayError;
+        hayError = compruebaCategoria(libros.getCategoria(), mensajeError) ? true : hayError;
+        hayError = compruebaIdioma(libros.getIdioma(), mensajeError) ? true : hayError;
+        hayError = compruebaPaginas(libros.getPaginas(), mensajeError) ? true : hayError;
+        hayError = compruebaEjemplares(libros.getEjemplares(), mensajeError) ? true : hayError;
 
 
         if (hayError) {
@@ -602,47 +514,61 @@ public class ControladorPrincipal implements Initializable {
             error.showAndWait();
         }
         return hayError;
+
     }
 
     // INSERT
     private void insertarLibro() throws SQLException {
-        ArrayList<Object> libros = leeValoresLibro();
+        Libro libros = leeValoresLibro();
         if (!mensajeErrorLibro(libros)) {
             consultaInsertarLibro(libros);
         }
     }
 
-    private void consultaInsertarLibro(ArrayList<Object> libros) throws SQLException {
+    private void consultaInsertarLibro(Libro libros) throws SQLException {
         String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libros en la base de datos
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            for (Object valor : libros) {
-                stmt.setString(i++, (String) valor);
-            }
-            stmt.executeUpdate(); // Ejecutar la consulta
+            stmt.setString(1, libros.getISBN());
+            stmt.setString(2, libros.getTitulo());
+            stmt.setString(3, libros.getAutor());
+            stmt.setString(4, libros.getIdioma());
+            stmt.setString(5, libros.getPaginas());
+            stmt.setString(6, libros.getEjemplares());
+            //stmt.setBlob(7, (Blob) libros.getimagen());
+
+            stmt.executeUpdate();// Ejecutar la consulta
+            ventanaDialogo("INSERTAR USUARIO", "Usuario insertado con éxito");
         }
     }
 
+
     // UPDATE
     private void actualizarLibro() throws SQLException {
-        ArrayList<Object> libros = leeValoresLibro();
+        Libro libros = leeValoresLibro();
         if (!mensajeErrorLibro(libros)) {
             consultaActualizarLibro(libros);
         }
     }
-
-    private void consultaActualizarLibro(ArrayList<Object> libros) throws SQLException {
+    private void consultaActualizarLibro(Libro libros) throws SQLException {
         String sql = "UPDATE libros SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            for (int j = 1; j < libros.size(); j++) {
-                stmt.setString(i++, (String) libros.get(j));
-            }
-            stmt.setString(i, (String) libros.get(0));
-            stmt.executeUpdate();
+            stmt.setString(1, libros.getISBN());
+            stmt.setString(2, libros.getTitulo());
+            stmt.setString(3, libros.getAutor());
+            stmt.setString(4, libros.getIdioma());
+            stmt.setString(5, libros.getPaginas());
+            stmt.setString(6, libros.getEjemplares());
+            //stmt.setBlob(7, (Blob) libros.getimagen());
+
+            stmt.executeUpdate();// Ejecutar la consulta
+            ventanaDialogo("ACTUALIZAR LIBRO", "Libro actualizado con éxito");
+
         }
     }
+
 
     // DELETE
     private void eliminarLibro(String ISBN) throws SQLException {
