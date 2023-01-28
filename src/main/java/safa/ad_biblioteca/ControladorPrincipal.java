@@ -261,7 +261,6 @@ public class ControladorPrincipal implements Initializable {
     // Para mostrar el formulario de registro libros
     void cambiarVistaFormUsuarioL() {
         panelLibros.setVisible(false);
-        panelLibrosPreview.setVisible(false);
         panelRegistroLibros.setVisible(true);
     }
     // Para mostrar el panel principal de libros
@@ -291,103 +290,6 @@ public class ControladorPrincipal implements Initializable {
         panelPrincipal.setVisible(true);
     }
 
-    public class BookController {
-
-        private TableView<Libro> ListViewDatosLibro;
-        private TextField tfBuscarISBN;
-        private Button btnLibrosBuscar;
-
-        // Mostrar el libro buscado
-        void mostrarLibroBuscado() throws SQLException {
-            cambiarVistaBusqueda();
-
-            try {
-                Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
-                Statement stmt = conexion.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
-
-                ListViewDatosLibro.getItems().clear();
-                while (rs.next()) {
-                    String titulo = rs.getString("titulo");
-                    String autor = rs.getString("autor");
-                    String ISBN = rs.getString("ISBN");
-
-
-                    Libro libro = new Libro(titulo, autor, ISBN);
-                    ListViewDatosLibro.getItems().add(libro);
-                }
-                ListViewDatosLibro.refresh();
-                conexion.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        // TODO metodo mostrar la imagen
-
-        public BookController(TableView<Libro> booksList) {
-            this.ListViewDatosLibro = ListViewDatosLibro;
-        }
-
-        @FXML
-        public void initialize(URL url, ResourceBundle resourceBundle) {
-            initTableView();
-            loadBooksFromDB();
-            btnLibrosBuscar.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    searchBook();
-                }
-            });
-        }
-
-        /*
-        btnLibrosBuscar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                searchBook();
-            }
-        });      */
-
-        public void loadBooksFromDB() {
-            try {
-                Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/biblioteca", "root", "root");
-                Statement stmt = conexion.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT titulo, autor, paginas FROM libro");
-
-                ListViewDatosLibro.getItems().clear();
-                while (rs.next()) {
-                    String titulo = rs.getString("titulo");
-                    String autor = rs.getString("autor");
-                    String paginas = rs.getString("paginas");
-
-                    Libro book = new Libro(titulo, autor, paginas);
-                    ListViewDatosLibro.getItems().add(book);
-                }
-                ListViewDatosLibro.refresh();
-                conexion.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Para mostrar los datos en la ListView
-        public void initTableView() {
-            TableColumn<Libro, String> tituloCol = new TableColumn<>("Titulo");
-            tituloCol.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-            ListViewDatosLibro.getColumns().add(tituloCol);
-
-            TableColumn<Libro, String> autorCol = new TableColumn<>("Autor");
-            autorCol.setCellValueFactory(new PropertyValueFactory<>("autor"));
-            ListViewDatosLibro.getColumns().add(autorCol);
-
-            TableColumn<Libro, String> paginasCol = new TableColumn<>("Paginas");
-            paginasCol.setCellValueFactory(new PropertyValueFactory<>("paginas"));
-            ListViewDatosLibro.getColumns().add(paginasCol);
-
-            ObservableList<Libro> books = FXCollections.observableArrayList();
-            ListViewDatosLibro.setItems(books);
-        }
-    } // tfBuscarISBN   btnLibrosBuscar
 
     @FXML
     private void searchBook() {
@@ -427,7 +329,7 @@ public class ControladorPrincipal implements Initializable {
         String ISBN = leerCampoLibro("ISBN", tfISBN.getText(), ".{10,13}");
         String titulo = leerCampoLibro("Titulo", tfTitulo.getText(), ".{1,50}");
         String autor = leerCampoLibro("Autor", tfAutor.getText(), ".{1,50}");
-        String categoria = leerCampoLibro("Categoria", tfCategoria.getText(), "^\\s*$");
+        String categoria = leerCampoLibro("Categoria", tfCategoria.getText(), ".{1,50}");
         String idioma = leerCampoLibro("Idioma", tfIdioma.getText(), ".{1,20}");
         String paginas = leerCampoLibro("Paginas", tfPaginas.getText(), ".{1,3}");
         String ejemplares = leerCampoLibro("Ejemplares", tfEjemplares.getText(), ".{1,3}");
@@ -493,17 +395,17 @@ public class ControladorPrincipal implements Initializable {
         return false;
     }
 
-    boolean mensajeErrorLibro(Libro libros) {
+    boolean mensajeErrorLibro(Libro libro) {
         boolean hayError = false;
         StringBuilder mensajeError = new StringBuilder();
 
-        hayError = compruebaISBN(libros.getISBN(), mensajeError) ? true : hayError;
-        hayError = compruebaTitulo(libros.getTitulo(), mensajeError) ? true : hayError;
-        hayError = compruebaAutor(libros.getAutor(), mensajeError) ? true : hayError;
-        hayError = compruebaCategoria(libros.getCategoria(), mensajeError) ? true : hayError;
-        hayError = compruebaIdioma(libros.getIdioma(), mensajeError) ? true : hayError;
-        hayError = compruebaPaginas(libros.getPaginas(), mensajeError) ? true : hayError;
-        hayError = compruebaEjemplares(libros.getEjemplares(), mensajeError) ? true : hayError;
+        hayError = compruebaISBN(libro.getISBN(), mensajeError) ? true : hayError;
+        hayError = compruebaTitulo(libro.getTitulo(), mensajeError) ? true : hayError;
+        hayError = compruebaAutor(libro.getAutor(), mensajeError) ? true : hayError;
+        hayError = compruebaCategoria(libro.getCategoria(), mensajeError) ? true : hayError;
+        hayError = compruebaIdioma(libro.getIdioma(), mensajeError) ? true : hayError;
+        hayError = compruebaPaginas(libro.getPaginas(), mensajeError) ? true : hayError;
+        hayError = compruebaEjemplares(libro.getEjemplares(), mensajeError) ? true : hayError;
 
 
         if (hayError) {
@@ -519,24 +421,25 @@ public class ControladorPrincipal implements Initializable {
 
     // INSERT
     private void insertarLibro() throws SQLException {
-        Libro libros = leeValoresLibro();
-        if (!mensajeErrorLibro(libros)) {
-            consultaInsertarLibro(libros);
+        Libro libro = leeValoresLibro();
+        if (!mensajeErrorLibro(libro)) {
+            consultaInsertarLibro(libro);
         }
     }
 
-    private void consultaInsertarLibro(Libro libros) throws SQLException {
-        String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libros en la base de datos
+    private void consultaInsertarLibro(Libro libro) throws SQLException {
+        String sql = "INSERT INTO libro (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libro en la base de datos
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            stmt.setString(1, libros.getISBN());
-            stmt.setString(2, libros.getTitulo());
-            stmt.setString(3, libros.getAutor());
-            stmt.setString(4, libros.getIdioma());
-            stmt.setString(5, libros.getPaginas());
-            stmt.setString(6, libros.getEjemplares());
-            //stmt.setBlob(7, (Blob) libros.getimagen());
+            stmt.setString(1, libro.getISBN());
+            stmt.setString(2, libro.getTitulo());
+            stmt.setString(3, libro.getAutor());
+            stmt.setString(4, libro.getCategoria());
+            stmt.setString(5, libro.getIdioma());
+            stmt.setString(6, libro.getPaginas());
+            stmt.setString(7, libro.getEjemplares());
+            //stmt.setBlob(7, (Blob) libro.getimagen());
 
             stmt.executeUpdate();// Ejecutar la consulta
             ventanaDialogo("INSERTAR USUARIO", "Usuario insertado con éxito");
@@ -546,22 +449,23 @@ public class ControladorPrincipal implements Initializable {
 
     // UPDATE
     private void actualizarLibro() throws SQLException {
-        Libro libros = leeValoresLibro();
-        if (!mensajeErrorLibro(libros)) {
-            consultaActualizarLibro(libros);
+        Libro libro = leeValoresLibro();
+        if (!mensajeErrorLibro(libro)) {
+            consultaActualizarLibro(libro);
         }
     }
-    private void consultaActualizarLibro(Libro libros) throws SQLException {
-        String sql = "UPDATE libros SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
+    private void consultaActualizarLibro(Libro libro) throws SQLException {
+        String sql = "UPDATE libro SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            stmt.setString(1, libros.getISBN());
-            stmt.setString(2, libros.getTitulo());
-            stmt.setString(3, libros.getAutor());
-            stmt.setString(4, libros.getIdioma());
-            stmt.setString(5, libros.getPaginas());
-            stmt.setString(6, libros.getEjemplares());
-            //stmt.setBlob(7, (Blob) libros.getimagen());
+            stmt.setString(1, libro.getISBN());
+            stmt.setString(2, libro.getTitulo());
+            stmt.setString(3, libro.getAutor());
+            stmt.setString(4, libro.getCategoria());
+            stmt.setString(5, libro.getIdioma());
+            stmt.setString(6, libro.getPaginas());
+            stmt.setString(7, libro.getEjemplares());
+              //stmt.setBlob(7, (Blob) libro.getimagen());
 
             stmt.executeUpdate();// Ejecutar la consulta
             ventanaDialogo("ACTUALIZAR LIBRO", "Libro actualizado con éxito");
@@ -572,7 +476,7 @@ public class ControladorPrincipal implements Initializable {
 
     // DELETE
     private void eliminarLibro(String ISBN) throws SQLException {
-        String sql = "DELETE FROM usuarios WHERE ISBN = ?";
+        String sql = "DELETE FROM libro WHERE ISBN = ?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             stmt.setString(1, ISBN);
             stmt.executeUpdate();
