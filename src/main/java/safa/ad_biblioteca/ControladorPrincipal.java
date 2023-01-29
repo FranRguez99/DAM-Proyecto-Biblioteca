@@ -250,7 +250,7 @@ public class ControladorPrincipal implements Initializable {
     }
     // Boton modificar
     @FXML
-    void modificarLibro() {
+    void modificarLibro(ActionEvent event) {
         cambiarVistaFormUsuarioL();
         editaLibro = true;
     }
@@ -457,16 +457,17 @@ public class ControladorPrincipal implements Initializable {
         }
     }
     void consultaActualizarLibro(Libro libro) throws SQLException {
-        String sql = "UPDATE libro SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
+        String sql = "UPDATE libro SET titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
-            stmt.setString(1, libro.getISBN());
-            stmt.setString(2, libro.getTitulo());
-            stmt.setString(3, libro.getAutor());
-            stmt.setString(4, libro.getCategoria());
-            stmt.setString(5, libro.getIdioma());
-            stmt.setString(6, libro.getPaginas());
-            stmt.setString(7, libro.getEjemplares());
+            stmt.setString(1, libro.getTitulo());
+            stmt.setString(2, libro.getAutor());
+            stmt.setString(3, libro.getCategoria());
+            stmt.setString(4, libro.getIdioma());
+            stmt.setString(5, libro.getPaginas());
+            stmt.setString(6, libro.getEjemplares());
+            stmt.setString(7, libro.getISBN());
+
 
             stmt.executeUpdate();// Ejecutar la consulta
             ventanaDialogo("ACTUALIZAR LIBRO", "Libro actualizado con éxito");
