@@ -678,6 +678,9 @@ public class ControladorPrincipal implements Initializable {
         }
     }
 
+    /* MÉTODOS PESTAÑA PRÉSTAMO */
+
+
     /* MÉTODOS PESTAÑA USUARIO */
 
     @FXML
@@ -856,7 +859,7 @@ public class ControladorPrincipal implements Initializable {
 
     private boolean compruebaClave(String email, StringBuilder mensajeError) {
         if (email == null) {
-            mensajeError.append("Clave (Debe tener al menos 8 caracteres, 1 mayúscula y 1 minúscula)\n");
+            mensajeError.append("Clave (Debe tener al menos 8 caracteres, 1 número, 1 mayúscula y 1 minúscula)\n");
             tfClave.setId("tfError");
             return true;
         } else {
