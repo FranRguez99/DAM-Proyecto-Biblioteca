@@ -515,6 +515,9 @@ void actualizarLibro() throws SQLException {
         }
     }
 
+    /* MÉTODOS PESTAÑA PRÉSTAMO */
+
+
     /* MÉTODOS PESTAÑA USUARIO */
 
     @FXML
@@ -693,7 +696,7 @@ void actualizarLibro() throws SQLException {
 
     private boolean compruebaClave(String email, StringBuilder mensajeError) {
         if (email == null) {
-            mensajeError.append("Clave (Debe tener al menos 8 caracteres, 1 mayúscula y 1 minúscula)\n");
+            mensajeError.append("Clave (Debe tener al menos 8 caracteres, 1 número, 1 mayúscula y 1 minúscula)\n");
             tfClave.setId("tfError");
             return true;
         } else {
