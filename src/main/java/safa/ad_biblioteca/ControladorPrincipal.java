@@ -25,6 +25,12 @@ public class ControladorPrincipal implements Initializable {
 
     // Elementos JavaFX
     @FXML
+    private HBox HBoxDatosLibroBuscado;
+
+    @FXML
+    private ListView<String> ListViewDatosLibro;
+
+    @FXML
     private Button btnDevolDevolver;
 
     @FXML
@@ -127,13 +133,31 @@ public class ControladorPrincipal implements Initializable {
     private Button btnUsuariosPrincipal;
 
     @FXML
+    private ImageView imageViewLib1;
+
+    @FXML
+    private ImageView imageViewLib2;
+
+    @FXML
+    private ImageView imageViewLib3;
+
+    @FXML
+    private ImageView imageViewLib4;
+
+    @FXML
+    private ImageView imageViewLib5;
+
+    @FXML
+    private ImageView imgViewLibroBuscado;
+
+    @FXML
     private Pane panelDevoluciones;
 
     @FXML
     private Pane panelLibros;
 
     @FXML
-    private TextField tfCategoria; // Lo he cambiado a textfield mientras para poder seguir
+    private Pane panelLibrosPreview;
 
     @FXML
     private Pane panelPrestamos;
@@ -154,6 +178,18 @@ public class ControladorPrincipal implements Initializable {
     private TextField tfApellidos;
 
     @FXML
+    private TextField tfAutor;
+
+    @FXML
+    private TextField tfBuscarISBN;
+
+    @FXML
+    private TextField tfBuscarUsuarios;
+
+    @FXML
+    private TextField tfCategoria;
+
+    @FXML
     private TextField tfClave;
 
     @FXML
@@ -163,61 +199,54 @@ public class ControladorPrincipal implements Initializable {
     private TextField tfDomicilio;
 
     @FXML
+    private TextField tfEjemplares;
+
+    @FXML
     private TextField tfEmail;
-
-    @FXML
-    private TextField tfNombre;
-
-    @FXML
-    private TextField tfTelefono;
 
     @FXML
     private TextField tfISBN;
 
     @FXML
-    private TextField tfTitulo;
-
-    @FXML
-    private TextField tfAutor;
-
-    @FXML
     private TextField tfIdioma;
+
+    @FXML
+    private TextField tfNombre;
 
     @FXML
     private TextField tfPaginas;
 
     @FXML
-    private TextField tfEjemplares;
+    private TextField tfTelefono;
 
     @FXML
-    private Pane panelLibrosPreview;
+    private TextField tfTitulo;
 
     @FXML
-    private ImageView imageViewLib1;
+    private TableView<Usuario> tvUsuarios;
 
     @FXML
-    private ImageView imageViewLib2;
+    private TableColumn<Usuario, String> colDNI;
 
     @FXML
-    private ImageView imageViewLib3;
+    private TableColumn<Usuario, String> colNombre;
 
     @FXML
-    private ImageView imageViewLib4;
+    private TableColumn<Usuario, String> colApellidos;
 
     @FXML
-    private ImageView imageViewLib5;
+    private TableColumn<Usuario, String> colDomicilio;
 
     @FXML
-    private HBox HBoxDatosLibroBuscado;
-
+    private TableColumn<Usuario, String> colTelefono;
+    
     @FXML
-    private ImageView imgViewLibroBuscado;
-
-    @FXML
-    private ListView<String> ListViewDatosLibro;
+private TableColumn<Usuario, String> colEmail;
 
     @FXML
     private TextField tfBuscarLibro;
+    
+
 
     @FXML
     void searchBook(ActionEvent event) {
@@ -240,6 +269,7 @@ public class ControladorPrincipal implements Initializable {
             actualizarLibro();
         } else {
             insertarLibro();
+
         } volverLibros();
     }
     // Boton borrar
@@ -450,12 +480,13 @@ public class ControladorPrincipal implements Initializable {
 
 
     // UPDATE
-    void actualizarLibro() throws SQLException {
+void actualizarLibro() throws SQLException {
         Libro libro = leeValoresLibro();
         if (!mensajeErrorLibro(libro)) {
             consultaActualizarLibro(libro);
         }
     }
+    
     void consultaActualizarLibro(Libro libro) throws SQLException {
         String sql = "UPDATE libro SET titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
@@ -493,13 +524,13 @@ public class ControladorPrincipal implements Initializable {
         } else {
             insertarUsuario();
         }
-        volverUsuario();
+
     }
 
     @FXML
     void borrarUsuario() throws SQLException {
-        eliminarUsuario("77864953V");
-        // todo lectura de la tabla para recoger el valor del dni de la misma
+        eliminarUsuario(tvUsuarios.getSelectionModel().getSelectedItem().getDNI());
+        cargarTablaUsuarios();
     }
 
     @FXML
@@ -523,11 +554,56 @@ public class ControladorPrincipal implements Initializable {
     void volverUsuario() {
         verUsuarios();
         tfDNI.setText("");
+        tfDNI.setId("tfNormal");
         tfNombre.setText("");
+        tfNombre.setId("tfNormal");
         tfApellidos.setText("");
+        tfApellidos.setId("tfNormal");
         tfDomicilio.setText("");
+        tfDomicilio.setId("tfNormal");
         tfTelefono.setText("");
+        tfTelefono.setId("tfNormal");
         tfEmail.setText("");
+        tfEmail.setId("tfNormal");
+        tfClave.setText("");
+        tfClave.setId("tfNormal");
+    }
+
+    @FXML
+    void cargarTablaUsuarios() throws SQLException {
+        ObservableList<Usuario> listaUsuarios = FXCollections.observableArrayList();
+
+        Statement stmt = conexion.conexion.createStatement();
+
+        String query = "SELECT * FROM usuarios";
+        String filtro = tfBuscarUsuarios.getText();
+        if(!filtro.equals("")){
+            query += " WHERE " +
+                    "DNI LIKE '%" + filtro + "%' OR " +
+                    "nombre LIKE '%" + filtro + "%' OR " +
+                    "apellidos LIKE '%" + filtro + "%' OR " +
+                    "domicilio LIKE '%" + filtro + "%' OR " +
+                    "telefono LIKE '%" + filtro + "%' OR " +
+                    "email LIKE '%" + filtro + "%' OR " +
+                    "clave LIKE '%" + filtro + "%';";
+        }
+
+        ResultSet datos = stmt.executeQuery(query);
+        while(datos.next()){
+            listaUsuarios.add(new Usuario(datos.getString("DNI"), datos.getString("nombre"),
+                    datos.getString("apellidos"), datos.getString("domicilio"),
+                    datos.getString("telefono"), datos.getString("email"),
+                    datos.getString("clave")));
+        }
+
+        tvUsuarios.setItems(listaUsuarios);
+
+        colDNI.setCellValueFactory(new PropertyValueFactory<>("DNI"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colApellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+        colDomicilio.setCellValueFactory(new PropertyValueFactory<>("domicilio"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 
     String leerCampo(String nombreCampo, String texto, String criterioValidacion) {
@@ -653,6 +729,8 @@ public class ControladorPrincipal implements Initializable {
         Usuario usuario = leerValoresUsuario();
         if (!mensajeErrorUsuario(usuario)) {
             consultaInsertarUsuario(usuario);
+            cargarTablaUsuarios();
+            volverUsuario();
         }
     }
 
@@ -681,6 +759,8 @@ public class ControladorPrincipal implements Initializable {
         Usuario usuario = leerValoresUsuario();
         if (!mensajeErrorUsuario(usuario)) {
             consultaActualizarUsuario(usuario);
+            cargarTablaUsuarios();
+            volverUsuario();
         }
     }
 
@@ -707,7 +787,9 @@ public class ControladorPrincipal implements Initializable {
         String sql = "DELETE FROM usuarios WHERE DNI = ?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             stmt.setString(1, DNI);
-            stmt.executeUpdate();
+
+            stmt.executeUpdate();// Ejecutar la consulta
+            ventanaDialogo("ELIMINAR USUARIO", "Usuario eliminado con éxito");
         }
     }
 
@@ -771,7 +853,11 @@ public class ControladorPrincipal implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            cargarTablaUsuarios();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
