@@ -1,5 +1,7 @@
 package safa.ad_biblioteca.model;
 
+import java.util.Date;
+
 public class Usuario {
 
     String DNI;
@@ -10,6 +12,9 @@ public class Usuario {
     String email;
     Boolean sancionado;
     String clave;
+    Date fecha_Sancion;
+
+
 
     public Usuario(String DNI, String nombre, String apellidos, String domicilio, String telefono, String email, String clave) {
         this.DNI = DNI;
@@ -20,6 +25,19 @@ public class Usuario {
         this.email = email;
         this.sancionado = false;
         this.clave = clave;
+        this.fecha_Sancion = null;
+    }
+
+    public Usuario(String DNI, String nombre, String apellidos, String domicilio, String telefono, String email, int sancionado, String clave, Date fecha_Sancion) {
+        this.DNI = DNI;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.email = email;
+        this.sancionado = sancionado == 1;
+        this.clave = clave;
+        this.fecha_Sancion = fecha_Sancion;
     }
 
     public String getDNI() {
@@ -84,5 +102,13 @@ public class Usuario {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public Date getFecha_Sancion() {
+        return fecha_Sancion;
+    }
+
+    public void setFecha_Sancion(Date fecha_Sancion) {
+        this.fecha_Sancion = fecha_Sancion;
     }
 }

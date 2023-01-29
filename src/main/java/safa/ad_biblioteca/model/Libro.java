@@ -13,6 +13,7 @@ public class Libro {
     String idioma;
     String paginas;
     String ejemplares;
+    Integer disponibles;
 
     @Override
     public String toString() {
@@ -28,21 +29,19 @@ public class Libro {
         this.idioma = idioma;
         this.paginas = paginas;
         this.ejemplares = ejemplares;
-
+        this.disponibles = Integer.valueOf(ejemplares);
     }
 
-    public Libro(String titulo, String autor, String ISBN) {
+    public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares, Integer disponibles) {
+        this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
-        this.ISBN = ISBN;
-
+        this.categoria = categoria;
+        this.idioma = idioma;
+        this.paginas = paginas;
+        this.ejemplares = ejemplares;
+        this.disponibles = disponibles;
     }
-
-    public Libro(String titulo) {
-        this.titulo = titulo;
-    }
-
-
 
     public String getISBN() {
         return ISBN;
@@ -100,4 +99,11 @@ public class Libro {
         this.ejemplares = ejemplares;
     }
 
+    public Integer getDisponible() {
+        return disponibles;
+    }
+
+    public void setDisponible(Integer disponibles) {
+        this.disponibles = disponibles;
+    }
 }

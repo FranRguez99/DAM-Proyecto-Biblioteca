@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,14 +11,33 @@
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="safa.ad_biblioteca.ControladorPrincipal">
    <children>
-      <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+      <Pane id="panel" fx:id="panelLogin" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+         <children>
+            <Text layoutX="264.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIAR SESIÓN" x="50.0" y="50.0">
+               <font>
+                  <Font name="Calibri Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfLoginDNI" layoutX="290.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="DNI" />
+            <TextField fx:id="tfLoginClave" layoutX="290.0" layoutY="228.0" prefHeight="25.0" prefWidth="240.0" promptText="Clave" />
+            <Button id="btnMenu" fx:id="btnLoginInicio" alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="284.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Iniciar sesión" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button id="btnMenu" fx:id="btnLoginNuevo" alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="340.0" mnemonicParsing="false" onAction="#nuevoUsuario" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Nuevo usuario" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Myanmar Text Bold" size="13.0" />
+               </font>
+            </Button>
+         </children></Pane>
+      <Pane id="panel" fx:id="panelPrincipal" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
          <children>
             <ImageView fitHeight="274.0" fitWidth="310.0" layoutX="525.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -106,7 +125,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto1" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_calendar.png" />
                      </image>
@@ -114,7 +133,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto2" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_calendarOK.png" />
                      </image>
@@ -122,7 +141,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto3" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_cuenta.png" />
                      </image>
@@ -161,7 +180,7 @@
                </children>
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-            <TextField fx:id="tfBuscarLibro" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Ingrese el Titulo, Autor o Categoría del Libro a buscar" />
+            <TextField id="tfNormal" fx:id="tfBuscarLibro" layoutX="243.0" layoutY="153.0" prefHeight="25.0" prefWidth="402.0" promptText="Buscar..." stylesheets="@style.css" />
             <Label id="txtSeccion" layoutX="241.0" layoutY="100.0" stylesheets="@style.css" text="Libros">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -203,7 +222,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto4" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_calendar.png" />
                      </image>
@@ -211,7 +230,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto5" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_calendarOK.png" />
                      </image>
@@ -219,7 +238,7 @@
                         <Bloom />
                      </effect>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="foto6" fitHeight="26.0" fitWidth="32.0" layoutX="150.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/ico_cuenta.png" />
                      </image>
@@ -229,7 +248,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="btnMenu" fx:id="btnLibrosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#searchBook" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnLibrosBuscar" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="151.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#cargarTablaLibros" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Buscar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -266,29 +285,16 @@
                   <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
             </ImageView>
-            <Pane fx:id="panelLibrosPreview" layoutX="241.0" layoutY="205.0" prefHeight="137.0" prefWidth="566.0" stylesheets="@style.css" visible="false">
-               <children>
-                  <ImageView fx:id="imageViewLib1" fitHeight="118.0" fitWidth="96.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewLib2" fitHeight="118.0" fitWidth="96.0" layoutX="110.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewLib3" fitHeight="118.0" fitWidth="96.0" layoutX="214.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageViewLib4" fitHeight="118.0" fitWidth="96.0" layoutX="331.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false" />
-                  <ImageView fx:id="imageViewLib5" fitHeight="118.0" fitWidth="96.0" layoutX="456.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
-            <HBox fx:id="HBoxDatosLibroBuscado" layoutX="318.0" layoutY="197.0" prefHeight="153.0" prefWidth="409.0">
-               <children>
-                  <ImageView fx:id="imgViewLibroBuscado" fitHeight="153.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets left="30.0" right="30.0" top="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ListView fx:id="ListViewDatosLibro" prefHeight="200.0" prefWidth="200.0" stylesheets="@style.css">
-                     <HBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </HBox.margin>
-                  </ListView>
-               </children>
-            </HBox>
+            <TableView fx:id="tvLibros" layoutX="240.0" layoutY="191.0" prefHeight="170.0" prefWidth="566.0">
+               <columns>
+                  <TableColumn fx:id="colISBN" prefWidth="92.79998779296875" text="ISBN" />
+                  <TableColumn fx:id="colTitulo" prefWidth="164.0" text="Título" />
+                  <TableColumn fx:id="colAutor" prefWidth="66.39999389648438" text="Autor" />
+                  <TableColumn fx:id="colCategoria" prefWidth="94.40005493164062" text="Categoría" />
+                  <TableColumn fx:id="colIdioma" prefWidth="70.39996337890625" text="Idioma" />
+                  <TableColumn fx:id="colDisponibles" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="80.800048828125" text="Disponibles" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Pane id="principal" fx:id="panelUsuarios" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
@@ -437,42 +443,48 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="DNI">
+            <Label id="letreros" layoutX="50.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="DNI">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Apellidos">
+            <Label id="letreros" layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Apellidos">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Nombre">
+            <Label id="letreros" layoutX="50.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Nombre">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Domicilio">
+            <Label id="letreros" layoutX="50.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Domicilio">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Teléfono">
+            <Label id="letreros" layoutX="460.0" layoutY="120.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Teléfono">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Email">
+            <Label id="letreros" layoutX="460.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Email">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfDNI" layoutX="50.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
-            <TextField fx:id="tfNombre" layoutX="50.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
-            <TextField fx:id="tfApellidos" layoutX="50.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
-            <TextField fx:id="tfDomicilio" layoutX="460.0" layoutY="160.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
-            <TextField fx:id="tfTelefono" layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
-            <TextField fx:id="tfEmail" layoutX="460.0" layoutY="320.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
+            <Label id="letreros" layoutX="460.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Clave">
+               <font>
+                  <Font name="Corbel Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfDNI" layoutX="50.0" layoutY="145.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el DNI" />
+            <TextField fx:id="tfNombre" layoutX="50.0" layoutY="205.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nombre" />
+            <TextField fx:id="tfApellidos" layoutX="50.0" layoutY="265.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese los apellidos" />
+            <TextField fx:id="tfDomicilio" layoutX="50.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el domicilio" />
+            <TextField fx:id="tfTelefono" layoutX="460.0" layoutY="145.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el teléfono" />
+            <TextField fx:id="tfEmail" layoutX="460.0" layoutY="240.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el correo electrónico" />
+            <TextField fx:id="tfClave" layoutX="460.0" layoutY="325.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese la clave" />
             <Button id="btnMenu" fx:id="btnRegUsuarioRegistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" onAction="#aceptarUsuarios" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
@@ -523,22 +535,22 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de páginas">
+            <Label id="letreros" layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de páginas">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <Label id="letreros" layoutX="460.0" layoutY="239.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de ejemplares">
+            <Label id="letreros" layoutX="460.0" layoutY="299.0" prefHeight="25.0" prefWidth="200.0" stylesheets="@style.css" text="Número de ejemplares">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfISBN" layoutX="50.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el ISBN del libro" />
-            <TextField fx:id="tfTitulo" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el título del libro" />
-            <TextField fx:id="tfAutor" layoutX="50.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el autor del libro" />
-            <TextField fx:id="tfIdioma" layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el idioma del libro" />
-            <TextField fx:id="tfPaginas" layoutX="460.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de páginas del libro" />
-            <TextField fx:id="tfEjemplares" layoutX="460.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de ejemplares del libro" />
+            <TextField id="tfNormal" fx:id="tfISBN" layoutX="50.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el ISBN del libro" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfTitulo" layoutX="50.0" layoutY="210.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el título del libro" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfAutor" layoutX="50.0" layoutY="269.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el autor del libro" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfIdioma" layoutX="460.0" layoutY="150.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el idioma del libro" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfPaginas" layoutX="460.0" layoutY="239.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de páginas del libro" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfEjemplares" layoutX="460.0" layoutY="328.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese el nº de ejemplares del libro" stylesheets="@style.css" />
             <Button id="btnMenu" fx:id="btnRegLibREgistrar" alignment="CENTER" contentDisplay="CENTER" layoutX="510.0" layoutY="365.0" mnemonicParsing="false" onAction="#aceptarLibros" prefHeight="37.0" prefWidth="142.0" stylesheets="@style.css" text="Registrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
@@ -554,7 +566,7 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfCategoria" layoutX="50.0" layoutY="328.0" prefHeight="25.0" prefWidth="240.0" promptText="Ingrese la categoria del libro" />
+            <ComboBox id="tfNormal" fx:id="cbCategoria" layoutX="51.0" layoutY="328.0" prefHeight="25.0" prefWidth="240.0" promptText="Seleccione categoría" stylesheets="@style.css" />
          </children>
       </Pane>
       <Pane id="principal" fx:id="panelPrestamos" prefHeight="420.0" prefWidth="820.0" style="-fx-background-color: #b7ffe4;" stylesheets="@style.css" visible="false">
@@ -569,7 +581,7 @@
                </children>
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-            <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
+            <TextField id="tfNormal" fx:id="tfPrestamoDNI" layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" stylesheets="@style.css" />
             <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="28.0" prefWidth="188.0" stylesheets="@style.css" text="Nuevo préstamo">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -637,7 +649,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="btnMenu" fx:id="btnPrestamosPrestar" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnPrestamosPrestar" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#insertaPrestamo" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Prestar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -645,7 +657,7 @@
                   <Insets bottom="5.0" top="1.0" />
                </padding>
             </Button>
-            <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
+            <TextField id="tfNormal" fx:id="tfPrestamoISBN" layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" stylesheets="@style.css" />
             <Label id="letreros" layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="DNI Usuario">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
@@ -680,7 +692,8 @@
                </children>
             </Pane>
             <Text layoutX="230.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We ♥ reading!" />
-            <TextField layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" />
+            <TextField id="tfNormal" fx:id="tfDevolucionDNI" layoutX="542.0" layoutY="193.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el DNI del usuario" stylesheets="@style.css" />
+            <TextField id="tfNormal" fx:id="tfDevolucionISBN" layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a devolver" stylesheets="@style.css" />
             <Label id="txtSeccion" layoutX="240.0" layoutY="99.0" prefHeight="23.0" prefWidth="200.0" stylesheets="@style.css" text="Devolución libro">
                <font>
                   <Font name="Corbel Bold" size="19.0" />
@@ -748,7 +761,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button id="btnMenu" fx:id="btnDevolDevolver" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
+            <Button id="btnMenu" fx:id="btnDevolDevolver" alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="322.0" maxHeight="41.0" maxWidth="-Infinity" minHeight="10.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#devolverLibro" prefHeight="30.0" prefWidth="142.0" style="-fx-background-color: #4ab57f;" stylesheets="@style.css" text="Devolver" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Myanmar Text Bold" size="13.0" />
                </font>
@@ -756,7 +769,6 @@
                   <Insets bottom="5.0" top="1.0" />
                </padding>
             </Button>
-            <TextField layoutX="542.0" layoutY="275.0" prefHeight="25.0" prefWidth="247.0" promptText="Ingrese el ISBN del libro a prestar" />
             <Label id="letreros" layoutX="542.0" layoutY="160.0" prefHeight="22.0" prefWidth="111.0" stylesheets="@style.css" text="DNI Usuario">
                <font>
                   <Font name="Corbel Bold" size="18.0" />
@@ -767,16 +779,17 @@
                   <Font name="Corbel Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="322.0" fitWidth="399.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/background/lib.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="82.0" fitWidth="178.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true" x="24.0" y="75.0">
                <image>
                   <Image url="@img/background/bibliotecas1024x512.png" />
                </image>
             </ImageView>
+            <TableView fx:id="tvPrestamos" layoutX="268.0" layoutY="152.0" prefHeight="242.0" prefWidth="247.0">
+              <columns>
+                <TableColumn fx:id="colPrestamoDNI" prefWidth="125.5999755859375" text="DNI Usuario" />
+                <TableColumn fx:id="colPrestamoISBN" prefWidth="120.80001831054688" text="ISBN" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>
