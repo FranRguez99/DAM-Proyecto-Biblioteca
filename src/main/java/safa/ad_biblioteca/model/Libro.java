@@ -13,10 +13,14 @@ public class Libro {
     String idioma;
     String paginas;
     String ejemplares;
-    ImageView imagen;
+
+    @Override
+    public String toString() {
+        return "Titulo: " + titulo + " - Autor: " + autor + " - Categoria: " + categoria;
+    }
 
 
-    public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares, ImageView imagen) {
+    public Libro(String ISBN, String titulo, String autor, String categoria, String idioma, String paginas, String ejemplares) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
@@ -24,7 +28,7 @@ public class Libro {
         this.idioma = idioma;
         this.paginas = paginas;
         this.ejemplares = ejemplares;
-        this.imagen = imagen;
+
     }
 
     public Libro(String titulo, String autor, String ISBN) {
@@ -39,13 +43,6 @@ public class Libro {
     }
 
 
-    public ImageView getimagen() {
-        return imagen;
-    }
-
-    public void setimagen(ImageView imagen) {
-        this.imagen = imagen;
-    }
 
     public String getISBN() {
         return ISBN;

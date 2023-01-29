@@ -219,8 +219,10 @@ public class ControladorPrincipal implements Initializable {
     @FXML
     private TextField tfBuscarLibro;
 
-
-
+    @FXML
+    void searchBook(ActionEvent event) {
+       btnLibrosBuscar.setOnAction(e -> searchBook());
+    }
     // Atributos
     Conexion conexion = new Conexion();
     Boolean editaUsuario;
@@ -243,7 +245,7 @@ public class ControladorPrincipal implements Initializable {
     // Boton borrar
     @FXML
     void borrarLibro(ActionEvent event) throws SQLException {
-        eliminarLibro("77864953V");
+        eliminarLibro("");
         // todo lectura de la tabla para recoger el valor del ISBN de la misma
     }
     // Boton modificar
@@ -308,6 +310,7 @@ public class ControladorPrincipal implements Initializable {
                 ListViewDatosLibro.getItems().add(titulo);
 
             }
+
             ListViewDatosLibro.refresh();
             conexion.close();
         } catch (SQLException e) {
@@ -333,8 +336,7 @@ public class ControladorPrincipal implements Initializable {
         String idioma = leerCampoLibro("Idioma", tfIdioma.getText(), ".{1,20}");
         String paginas = leerCampoLibro("Paginas", tfPaginas.getText(), ".{1,3}");
         String ejemplares = leerCampoLibro("Ejemplares", tfEjemplares.getText(), ".{1,3}");
-       // String imagen = leerCampoLibro("imagen", String.valueOf(imgViewLibroBuscado.getImage()), null);
-        return new Libro(ISBN, titulo, autor, categoria, idioma, paginas, ejemplares, null);
+        return new Libro(ISBN, titulo, autor, categoria, idioma, paginas, ejemplares);
 
     }
 
@@ -439,22 +441,22 @@ public class ControladorPrincipal implements Initializable {
             stmt.setString(5, libro.getIdioma());
             stmt.setString(6, libro.getPaginas());
             stmt.setString(7, libro.getEjemplares());
-            //stmt.setBlob(7, (Blob) libro.getimagen());
+
 
             stmt.executeUpdate();// Ejecutar la consulta
-            ventanaDialogo("INSERTAR USUARIO", "Usuario insertado con éxito");
+            ventanaDialogo("INSERTAR LIBROS", "Libro insertado con éxito");
         }
     }
 
 
     // UPDATE
-    private void actualizarLibro() throws SQLException {
+    void actualizarLibro() throws SQLException {
         Libro libro = leeValoresLibro();
         if (!mensajeErrorLibro(libro)) {
             consultaActualizarLibro(libro);
         }
     }
-    private void consultaActualizarLibro(Libro libro) throws SQLException {
+    void consultaActualizarLibro(Libro libro) throws SQLException {
         String sql = "UPDATE libro SET ISBN=?, titulo=?, autor=?, categoria=?, idioma=?, paginas=?, ejemplares=? WHERE ISBN=?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
@@ -465,17 +467,15 @@ public class ControladorPrincipal implements Initializable {
             stmt.setString(5, libro.getIdioma());
             stmt.setString(6, libro.getPaginas());
             stmt.setString(7, libro.getEjemplares());
-              //stmt.setBlob(7, (Blob) libro.getimagen());
 
             stmt.executeUpdate();// Ejecutar la consulta
             ventanaDialogo("ACTUALIZAR LIBRO", "Libro actualizado con éxito");
-
         }
     }
 
 
     // DELETE
-    private void eliminarLibro(String ISBN) throws SQLException {
+    void eliminarLibro(String ISBN) throws SQLException {
         String sql = "DELETE FROM libro WHERE ISBN = ?";
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             stmt.setString(1, ISBN);

@@ -148,7 +148,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css">
+      <Pane id="panel" fx:id="panelLibros" prefHeight="420.0" prefWidth="820.0" stylesheets="@style.css" visible="false">
          <children>
             <Pane id="barraSuperior" layoutY="35.0" prefHeight="50.0" prefWidth="820.0" stylesheets="@style.css">
                <children>
