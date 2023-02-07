@@ -311,9 +311,11 @@ public class ControladorPrincipal implements Initializable {
 
         if (usuario.equals("admin") && clave.equals("admin")) {
             inicio();
+            sesionIniciada = true;
         } else {
             Statement stmt = conexion.createStatement();
             String sql = "SELECT * FROM usuarios WHERE DNI='" + usuario + "' AND clave='" + clave + "'";
+            System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
@@ -607,7 +609,7 @@ public class ControladorPrincipal implements Initializable {
     }
 
     private void consultaInsertarLibro(Libro libro) throws SQLException {
-        String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares, disponible) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libro en la base de datos
+        String sql = "INSERT INTO libros (ISBN, titulo, autor, categoria, idioma, paginas, ejemplares, disponible) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; // Consulta para insertar libro en la base de datos
         try (PreparedStatement stmt = conexion.conexion.prepareStatement(sql)) {
             int i = 1;
             stmt.setString(1, libro.getISBN());
@@ -692,18 +694,23 @@ public class ControladorPrincipal implements Initializable {
         while (datos.next()) {
             usuario = new Usuario(datos.getString("DNI"), datos.getString("nombre"), datos.getString("apellidos"), datos.getString("domicilio"), datos.getString("telefono"), datos.getString("email"), datos.getInt("sancionado"), datos.getString("clave"), datos.getDate("fecha_Sancion"));
         }
-        long diferencia = new Date().getTime() - usuario.getFecha_Sancion().getTime();
-        if (diferencia >= 30 * 24 * 60 * 60 * 1000) {
-            String sql = "UPDATE usuarios SET sancionado = 0 WHERE DNI = ?";
-            try (PreparedStatement stmtUpdate = conexion.conexion.prepareStatement(sql)) {
+        try{
+            long diferencia = new Date().getTime() - usuario.getFecha_Sancion().getTime();
+            if (diferencia >= 30 * 24 * 60 * 60 * 1000) {
+                String sql = "UPDATE usuarios SET sancionado = 0 WHERE DNI = ?";
+                try (PreparedStatement stmtUpdate = conexion.conexion.prepareStatement(sql)) {
 
-                stmtUpdate.setString(1, DNI);
-                stmtUpdate.executeUpdate();// Ejecutar la consulta
+                    stmtUpdate.setString(1, DNI);
+                    stmtUpdate.executeUpdate();// Ejecutar la consulta
+                }
+            } else {
+                ventanaDialogo("USUARIO SANCIONADO", "El usuario ha sido sancionado por un retraso " + "en la entrega");
+                throw new SancionException("Usuario sancionado");
             }
-        } else {
-            ventanaDialogo("USUARIO SANCIONADO", "El usuario ha sido sancionado por un retraso " + "en la entrega");
-            throw new SancionException("Usuario sancionado");
+        } catch (Exception ignored){
+
         }
+
     }
 
     void consultaInsertaPrestamo() throws SQLException {
@@ -1226,7 +1233,7 @@ public class ControladorPrincipal implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        List<String> categorias = Arrays.asList("Terror", "Ciencia ficción", "Drama", "Bélica", "Infantil", "Comedia", "Aventuras", "Cómic");
+        List<String> categorias = Arrays.asList("Terror", "Ficción", "Drama", "Bélica", "Infantil", "Comedia", "Aventuras", "Cómic");
         cbCategoria.getItems().addAll(categorias);
     }
 }

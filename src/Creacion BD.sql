@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `libros` (
                                         `ISBN` varchar(13) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
                                         `titulo` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
                                         `autor` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
-                                        `categoria` set('Terror','Ciencia ficción','Drama','Bélica','Infantil','Comedia','Aventuras','Cómic') CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+                                        `categoria` set('Terror','Ficción','Drama','Bélica','Infantil','Comedia','Aventuras','Cómic') CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
                                         `idioma` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
                                         `paginas` varchar(255) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
                                         `ejemplares` int(3) NOT NULL DEFAULT 0,
@@ -34,13 +34,13 @@ CREATE TABLE IF NOT EXISTS `libros` (
 DELETE FROM `libros`;
 /*!40000 ALTER TABLE `libros` DISABLE KEYS */;
 INSERT INTO `libros` (`ISBN`, `titulo`, `autor`, `categoria`, `idioma`, `paginas`, `ejemplares`, `disponible`) VALUES
-                                                                                                                   ('123456222PP', 'Cumbres borrascosas', 'Emily Bronte', 'Drama', 'inglés', '460', 3, 3),
+                                                                                                                   ('123456222PP', 'Cumbres borrascosas', 'Emily Bronte', 'Terror', 'inglés', '460', 3, 3),
                                                                                                                    ('123456333CC', 'El Principito', 'Antoine de Saint-Exupéry', 'Infantil', 'francés', '91', 4, 4),
                                                                                                                    ('123456444JJ', 'El retrato de Dorian Grey', 'Oscar Wilde', 'Terror', 'inglés', '248', 3, 3),
-                                                                                                                   ('123456766FF', 'El Alquimista', 'Paulo Coelho', '', 'español', '208', 2, 1),
+                                                                                                                   ('123456766FF', 'El Alquimista', 'Paulo Coelho', 'Infantil', 'español', '208', 2, 1),
                                                                                                                    ('123456787EE', 'Los Miserables', 'Víctor Hugo', 'Drama', 'francés', '1464', 1, 1),
-                                                                                                                   ('123456788CC', 'Nada', 'Carmen Laforet', '', 'español', '216', 2, 2),
-                                                                                                                   ('123456789BB', '1984', 'George Orwell', '', 'ingles', '328', 1, 1),
+                                                                                                                   ('123456788CC', 'Nada', 'Carmen Laforet', 'Infantil', 'español', '216', 2, 2),
+                                                                                                                   ('123456789BB', '1984', 'George Orwell', 'Drama', 'ingles', '328', 1, 1),
                                                                                                                    ('123456888TT', 'Cien años de Soledad', 'Gabriel García Márquez', '', 'español', '417', 3, 3),
                                                                                                                    ('123456987GG', 'La Divina Comedia', 'Dante', 'Aventuras', 'italiano', '100', 2, 2),
                                                                                                                    ('123456999RR', 'Un mundo feliz', 'Aldous Huxley', '', 'inglés', '288', 2, 2);
@@ -58,9 +58,11 @@ CREATE TABLE IF NOT EXISTS `prestamos` (
                                            CONSTRAINT `FK_prestamos_usuarios` FOREIGN KEY (`DNI_usuario`) REFERENCES `usuarios` (`DNI`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla biblioteca.prestamos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla biblioteca.prestamos: ~1 rows (aproximadamente)
 DELETE FROM `prestamos`;
 /*!40000 ALTER TABLE `prestamos` DISABLE KEYS */;
+INSERT INTO `prestamos` (`DNI_usuario`, `ISBN`, `fecha_salida`, `fecha_devolucion`) VALUES
+    ('06662539Z', '123456222PP', '2023-01-30', NULL);
 /*!40000 ALTER TABLE `prestamos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla biblioteca.usuarios
